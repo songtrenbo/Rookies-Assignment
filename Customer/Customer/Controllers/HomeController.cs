@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Customer.Controllers
 {
     public class HomeController : Controller
-    {
+    {         
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -18,15 +18,12 @@ namespace Customer.Controllers
             _logger = logger;
         }
 
+        DBShoesShopContext database = new DBShoesShopContext();
         public IActionResult Index()
-        {
-            return View();
+        {            
+            return View(database.Brands.ToList());
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+   
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
