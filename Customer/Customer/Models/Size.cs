@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-
-#nullable disable
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Customer.Models
 {
-    public partial class Size
+    public class Size
     {
-        public Size()
-        {
-            SizeProducts = new HashSet<SizeProduct>();
-        }
-
+        [Key]
         public int SizeId { get; set; }
+
+        [Required]
         public double SizeName { get; set; }
 
-        public virtual ICollection<SizeProduct> SizeProducts { get; set; }
+        public ICollection<SizeProduct> SizeProducts { get; set; }
     }
 }

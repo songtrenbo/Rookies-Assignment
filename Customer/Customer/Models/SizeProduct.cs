@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-
-#nullable disable
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Customer.Models
 {
-    public partial class SizeProduct
+    public class SizeProduct
     {
+        [Key]
         public int SizeProductId { get; set; }
         public int SizeId { get; set; }
         public int ProductId { get; set; }
 
-        public virtual Product Product { get; set; }
-        public virtual Size Size { get; set; }
+        public Product Product { get; set; }
+        public Size Size { get; set; }
     }
 }

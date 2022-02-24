@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-
-#nullable disable
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Customer.Models
 {
-    public partial class Order
+    public class Order
     {
-        public Order()
-        {
-            OrderDetails = new HashSet<OrderDetail>();
-            Rates = new HashSet<Rate>();
-        }
-
+        [Key]
         public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }
         public int? Status { get; set; }
@@ -20,8 +16,8 @@ namespace Customer.Models
         public DateTime? ShippingDate { get; set; }
         public int? UserId { get; set; }
 
-        public virtual User User { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual ICollection<Rate> Rates { get; set; }
+        public User User { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<Rate> Rates { get; set; }
     }
 }

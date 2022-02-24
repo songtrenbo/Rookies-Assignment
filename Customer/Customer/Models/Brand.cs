@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-
-#nullable disable
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Customer.Models
 {
-    public partial class Brand
+    public class Brand
     {
-        public Brand()
-        {
-            Products = new HashSet<Product>();
-        }
-
+        [Key]
         public int BrandId { get; set; }
+
+        [Required]
+        [Column(TypeName = "nvarchar(250)")]
         public string BrandName { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

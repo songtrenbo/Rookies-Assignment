@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-
-#nullable disable
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Customer.Models
 {
-    public partial class Product
+    public class Product
     {
-        public Product()
-        {
-            Images = new HashSet<Image>();
-            OrderDetails = new HashSet<OrderDetail>();
-            Rates = new HashSet<Rate>();
-            SizeProducts = new HashSet<SizeProduct>();
-        }
-
+        [Key]
         public int ProductId { get; set; }
+
+        [Required]
+        [Column(TypeName ="nvarchar(250)")]
         public string ProductName { get; set; }
+
+        [Required]
+        [Column(TypeName = "nvarchar(1000)")]
         public string ProductDesc { get; set; }
+
+        [Required]
         public double? Price { get; set; }
         public DateTime? CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
@@ -25,11 +28,11 @@ namespace Customer.Models
         public int BrandId { get; set; }
         public int Stock { get; set; }
 
-        public virtual Brand Brand { get; set; }
-        public virtual Category Category { get; set; }
-        public virtual ICollection<Image> Images { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual ICollection<Rate> Rates { get; set; }
-        public virtual ICollection<SizeProduct> SizeProducts { get; set; }
+        public Brand Brand { get; set; }
+        public Category Category { get; set; }
+        public ICollection<Image> Images { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<Rate> Rates { get; set; }
+        public ICollection<SizeProduct> SizeProducts { get; set; }
     }
 }

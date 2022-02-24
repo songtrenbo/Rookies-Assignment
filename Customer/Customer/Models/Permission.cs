@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-
-#nullable disable
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Customer.Models
 {
-    public partial class Permission
+    public class Permission
     {
-        public Permission()
-        {
-            Users = new HashSet<User>();
-        }
-
+        [Key]
         public int PermissionId { get; set; }
         public string PermissionName { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }
