@@ -74,5 +74,50 @@ namespace Backend.Api.Controllers
             }
         }
 
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<Brand>> UpdateBrand(int id, Brand brand)
+        {
+            try
+            {
+                if (id != brand.BrandId)
+                {
+                    return BadRequest("Brand ID mismatch");
+                }
+                var brandToUpdate = await brandRepository.GetBrand(id);
+                
+                if(brandToUpdate == null)
+                {
+                    return NotFound($"Brand with Id = {id} not found");
+                }
+
+                return await brandRepository.UpdateBrand(brand);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                  "Error updating data");
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Brand>> DeleteBrand(int id)
+        {
+            try
+            {
+                var brandToDelete = await brandRepository.GetBrand(id);
+
+                if(brandToDelete == null)
+                {
+                    return NotFound($"Brand with Id = {id} not found");
+                }
+
+                return await brandRepository.DeleteBrand(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                  "Error deleting data");
+            }
+        }
     }
 }

@@ -41,7 +41,7 @@ namespace Backend
 
 
         );
-            services.AddScoped<IBrandRepository, BrandService>();
+            services.AddScoped<IBrandRepository, BrandRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

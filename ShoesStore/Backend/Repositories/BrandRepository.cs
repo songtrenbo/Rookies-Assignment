@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Backend.Services
 {
-    public class BrandService : IBrandRepository
+    public class BrandRepository : IBrandRepository
     {
         private readonly ShoesStoreDatabaseContext shoesStoreDatabaseContext;
 
-        public BrandService(ShoesStoreDatabaseContext shoesStoreDatabaseContext)
+        public BrandRepository(ShoesStoreDatabaseContext shoesStoreDatabaseContext)
         {
             this.shoesStoreDatabaseContext = shoesStoreDatabaseContext;
         }
@@ -23,14 +23,16 @@ namespace Backend.Services
             return result.Entity;
         }
 
-        public async void DeleteBrand(int brandId)
+        public async Task<Brand> DeleteBrand(int brandId)
         {
             var result = await shoesStoreDatabaseContext.Brands.FirstOrDefaultAsync(e => e.BrandId == brandId);
             if (result != null)
             {
                 shoesStoreDatabaseContext.Brands.Remove(result);
                 await shoesStoreDatabaseContext.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
         public async Task<Brand> GetBrand(int brandId)
         {

@@ -12,7 +12,7 @@ namespace Backend.Services
         Task<Brand> GetBrand(int brandId);
         Task<Brand> AddBrand(Brand brand);
         Task<Brand> UpdateBrand(Brand brand);
-        void DeleteBrand(int brandId);
+        Task<Brand> DeleteBrand(int brandId);
 
     }
 }
