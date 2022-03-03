@@ -1,4 +1,9 @@
-﻿using CustomerSite.Models;
+﻿using AutoMapper;
+using Backend.Models;
+using CustomerSite.Models;
+using CustomerSite.Services;
+using CustomerSite.ViewModel.Product;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,27 +16,20 @@ namespace CustomerSite.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProductService _productService;
+        private readonly IMapper _mapper;
+        public HomeController(IProductService productService, IMapper mapper)
         {
-            _logger = logger;
+            _productService = productService;
+            _mapper = mapper;
         }
-
-        public IActionResult Index()
+        [BindProperty]
+        public ProductVM Product { get; set; }
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var data = await _productService.GetTop9NewProduct();
+            var productMapping = _mapper.Map<IEnumerable<Top9NewProductVM>>(data);
+            return View(productMapping);
         }
     }
 }

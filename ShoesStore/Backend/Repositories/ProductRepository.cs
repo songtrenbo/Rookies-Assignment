@@ -54,6 +54,19 @@ namespace Backend.Repositories
                 .Include(e => e.Category)
                 .Include(e => e.SizeProducts)
                 .Include(e => e.Rates)
+                .OrderBy(e => e.UpdateDate).Take(6)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetTop9NewProduct()
+        {
+            return await shoesStoreDatabaseContext.Products
+                .Include(e => e.Brand)
+                .Include(e => e.Images)
+                .Include(e => e.Category)
+                .Include(e => e.SizeProducts)
+                .Include(e => e.Rates)
+                .OrderBy(e => e.CreateDate).Take(9)
                 .ToListAsync();
         }
 

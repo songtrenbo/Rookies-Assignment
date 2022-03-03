@@ -120,5 +120,19 @@ namespace Backend.Controllers
                                   "Error updating data");
             }
         }
+
+        [HttpGet("GetTop9NewProduct")]
+        public async Task<ActionResult> GetTop9NewProduct()
+        {
+            try
+            {
+                return Ok(await productRepository.GetTop9NewProduct());
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
     }
 }
