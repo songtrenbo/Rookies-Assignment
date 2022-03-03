@@ -66,7 +66,7 @@ namespace Backend.Repositories
                 .Include(e => e.Category)
                 .Include(e => e.SizeProducts)
                 .Include(e => e.Rates)
-                .OrderBy(e => e.CreateDate).Take(9)
+                .OrderByDescending(e => e.CreateDate).Take(9)
                 .ToListAsync();
         }
 
