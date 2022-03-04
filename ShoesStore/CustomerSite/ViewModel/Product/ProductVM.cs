@@ -16,7 +16,10 @@ namespace CustomerSite.ViewModel.Product
         public double? Price { get; set; }
 
         public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
         public int? BrandId { get; set; }
+        public string BrandName { get; set; }
         public int Stock { get; set; }
+        public string Path { get; set; }
     }
 }

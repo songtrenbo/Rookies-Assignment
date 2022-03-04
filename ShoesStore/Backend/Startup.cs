@@ -43,6 +43,7 @@ namespace Backend
 
         );
             services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
         }
 

@@ -141,20 +141,14 @@
                     Excepteur sint occaecat cupidatat non proident.
                 </p>
             </div>
-        </div>       
+        </div>
         <div class="row">
             @foreach (var item in Model)
             {
-                @*@foreach(var i in item.Images)
-            {
-                <img src="@i.Path" class="card-img-top" alt="..." asp-append-version="true">
-            }*@
-                @*<img src="@item.Path" class="card-img-top" alt="..." asp-append-version="true">*@
-                <div class="col-12 col-md-4 mb-4">
+                <div class="col-12 col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <a href="shop-single.html" style="height: 50%">
-                            <img src="@item.Path" class="card-img-top" alt="..." asp-append-version="true" style="width:98%; padding:1%;">
-                        </a>
+                        <img src="@item.Path" class="card-img-top" alt="..." asp-append-version="true" style="height:250px; padding:15px">
+
                         <div class="card-body">
                             <ul class="list-unstyled d-flex justify-content-between">
                                 <li>
@@ -166,13 +160,13 @@
                                 </li>
                                 <li class="text-muted text-right">$@item.Price</li>
                             </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">@item.ProductName</a>
+                            <a href="@Url.Action("ProductDetail","Home", new { id = item.ProductId })" class="h2 text-decoration-none text-dark">@item.ProductName</a>
 
                             @{
                                 if (item.ProductDesc.Length > 200)
                                 {
                                     <p class="card-text">
-                                        @item.ProductDesc.Substring(0,190) ...
+                                        @item.ProductDesc.Substring(0, 190) ...
                                     </p>
                                 }
                                 else
@@ -182,10 +176,10 @@
                                     </p>
                                 }
                             }
-                            @*@item.ProductDesc*@
                         </div>
                     </div>
                 </div>
+               
             }
         </div>
     </div>

@@ -12,8 +12,16 @@ namespace CustomerSite.Mapping
     {
         public ProductAutoMapping()
         {
-            CreateMap<Product, ProductVM>().ReverseMap();
-            CreateMap<Product, Top9NewProductVM>().ForMember(q=>q.Path, otp=>otp.MapFrom(s=>s.Images.FirstOrDefault().Path)).ReverseMap();
+            CreateMap<Product, ProductVM>()
+                .ForMember(q=>q.BrandName, otp => otp.MapFrom(s=>s.Brand.BrandName))
+                .ForMember(q=>q.CategoryName, otp => otp.MapFrom(s=>s.Category.CategoryName))
+                .ForMember(q=>q.Path, otp => otp.MapFrom(s=>s.Images.FirstOrDefault().Path))
+                .ReverseMap();
+
+            CreateMap<Product, Top9NewProductVM>()
+                .ForMember(q=>q.Path, otp=>otp.MapFrom(s=>s.Images.FirstOrDefault().Path))
+                .ReverseMap();
+            
         }
     }
 }

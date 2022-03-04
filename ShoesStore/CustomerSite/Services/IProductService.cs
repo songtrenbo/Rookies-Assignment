@@ -10,5 +10,6 @@ namespace CustomerSite.Services
     {
         Task<IEnumerable<Product>> GetProducts();
         Task<IEnumerable<Product>> GetTop9NewProduct();
+        Task<Product> GetProduct(int productId);
     }
 }

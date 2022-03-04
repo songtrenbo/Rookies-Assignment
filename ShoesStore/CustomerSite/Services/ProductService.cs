@@ -45,5 +45,15 @@ namespace CustomerSite.Services
             var products = JsonConvert.DeserializeObject<List<Product>>(body);
             return (IEnumerable<Product>)products;
         }
+
+        public async Task<Product> GetProduct(int productId)
+        {
+            var client = _clientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var response = await client.GetAsync("/api/Products/" + productId);
+            var body = await response.Content.ReadAsStringAsync();
+            var product = JsonConvert.DeserializeObject<Product>(body);
+            return product;
+        }
     }
 }
