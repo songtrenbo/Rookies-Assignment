@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-lg-5 mt-5">
                 <div class="card mb-3">
-                    <img class="card-img img-fluid" src="@Model.Path" alt="Card image cap" id="product-detail" style="height:300px">
+                    <img class="card-img img-fluid" src="@Model.Path" alt="Card image cap" id="product-detail" style=" height: 300px; object-fit: contain ">
                 </div>
                 <div class="row">
                     <!--Start Controls-->
@@ -34,7 +34,7 @@
                                         {
                                             <div class="col-4">
                                                 <a href="#">
-                                                    <img class="card-img img-fluid" src="@item.Path" alt="Product Image @count" asp-append-version="true" style="height:70px">
+                                                    <img class="card-img img-fluid" src="@item.Path" alt="Product Image @count" asp-append-version="true" style=" height: 80px; object-fit: contain ">
                                                 </a>
                                             </div>
                                             count++;
@@ -57,7 +57,7 @@
                                                 {
                                                     <div class="col-4">
                                                         <a href="#">
-                                                            <img class="card-img img-fluid" src="@item.Path" alt="Product Image @count" asp-append-version="true" style="height:70px">
+                                                            <img class="card-img img-fluid" src="@item.Path" alt="Product Image @count" asp-append-version="true" style=" height: 80px; object-fit: contain ">
                                                         </a>
                                                     </div>
                                                 }

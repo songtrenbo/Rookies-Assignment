@@ -12,10 +12,6 @@ namespace CustomerSite.Services
 {
     public class ProductService : IProductService
     {
-        public ProductService()
-        {
-
-        }
 
         private readonly IHttpClientFactory _clientFactory;
 
@@ -54,6 +50,16 @@ namespace CustomerSite.Services
             var body = await response.Content.ReadAsStringAsync();
             var product = JsonConvert.DeserializeObject<Product>(body);
             return product;
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByCategory(int categoryId)
+        {
+            var client = _clientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var response = await client.GetAsync("/api/Products/Category/" + categoryId);
+            var body = await response.Content.ReadAsStringAsync();
+            var products = JsonConvert.DeserializeObject<List<Product>>(body);
+            return (IEnumerable<Product>)products;
         }
     }
 }

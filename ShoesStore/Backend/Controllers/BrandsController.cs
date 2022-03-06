@@ -20,6 +20,7 @@ namespace Backend.Api.Controllers
             this.brandRepository = brandRepository;
         }
 
+        //Get a list of brands
         [HttpGet]
         public async Task<ActionResult> GetBrands()
         {
@@ -34,6 +35,7 @@ namespace Backend.Api.Controllers
             }
         }
 
+        //Get 1 brand by ID
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Brand>> GetBrand(int id)
         {
@@ -53,6 +55,7 @@ namespace Backend.Api.Controllers
             }
         }
 
+        //Create a new brand
         [HttpPost]
         public async Task<ActionResult<Brand>> CreateBrand(Brand brand)
         {
@@ -74,6 +77,7 @@ namespace Backend.Api.Controllers
             }
         }
 
+        //Update 1 brand
         [HttpPut("{id:int}")]
         public async Task<ActionResult<Brand>> UpdateBrand(int id, Brand brand)
         {
@@ -99,6 +103,7 @@ namespace Backend.Api.Controllers
             }
         }
 
+        //Delete 1 brand
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<Brand>> DeleteBrand(int id)
         {

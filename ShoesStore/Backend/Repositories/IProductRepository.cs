@@ -14,5 +14,6 @@ namespace Backend.Repositories
         Task<Product> UpdateProduct(Product product);
         Task<Product> DeleteProduct(int productId);
         Task<IEnumerable<Product>> GetTop9NewProduct();
+        Task<IEnumerable<Product>> GetProductsByCategory(int categoryId);
     }
 }

@@ -20,6 +20,7 @@ namespace Backend.Controllers
             this.productRepository = productRepository;
         }
 
+        //Get a list of products
         [HttpGet]
         public async Task<ActionResult> GetProducts()
         {
@@ -34,6 +35,7 @@ namespace Backend.Controllers
             }
         }
 
+        //Get 1 product by ID
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
@@ -53,6 +55,7 @@ namespace Backend.Controllers
             }
         }
 
+        //Create a new product
         [HttpPost]
         public async Task<ActionResult<Product>> CreateProduct(Product product)
         {
@@ -74,6 +77,7 @@ namespace Backend.Controllers
             }
         }
 
+        //Delete a product with ID
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<Product>> DeleteProduct(int id)
         {
@@ -95,7 +99,7 @@ namespace Backend.Controllers
             }
         }
 
-
+        //Update 1 product
         [HttpPut("{id:int}")]
         public async Task<ActionResult<Product>> UpdateProduct(int id, Product product)
         {
@@ -121,12 +125,28 @@ namespace Backend.Controllers
             }
         }
 
+        //Get a list of top 9 new products
         [HttpGet("GetTop9NewProduct")]
         public async Task<ActionResult> GetTop9NewProduct()
         {
             try
             {
                 return Ok(await productRepository.GetTop9NewProduct());
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
+
+        //Get a list of products with categoryId
+        [HttpGet("Category/{id:int}")]
+        public async Task<ActionResult> GetProductsByCategory(int id)
+        {
+            try
+            {
+                return Ok(await productRepository.GetProductsByCategory(id));
             }
             catch (Exception)
             {

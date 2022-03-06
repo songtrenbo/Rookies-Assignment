@@ -49,21 +49,26 @@ namespace Backend.Repositories
         public async Task<IEnumerable<Product>> GetProducts()
         {
             return await shoesStoreDatabaseContext.Products
-                .Include(e => e.Brand)
                 .Include(e => e.Images)
-                .Include(e => e.Category)
                 .Include(e => e.SizeProducts)
                 .Include(e => e.Rates)
-                .OrderBy(e => e.UpdateDate).Take(6)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByCategory(int categoryId)
+        {
+            return await shoesStoreDatabaseContext.Products
+                .Where(s => s.CategoryId == categoryId)
+                .Include(e => e.Images)
+                .Include(e => e.SizeProducts)
+                .Include(e => e.Rates)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<Product>> GetTop9NewProduct()
         {
             return await shoesStoreDatabaseContext.Products
-                .Include(e => e.Brand)
                 .Include(e => e.Images)
-                .Include(e => e.Category)
                 .Include(e => e.SizeProducts)
                 .Include(e => e.Rates)
                 .OrderByDescending(e => e.CreateDate).Take(9)

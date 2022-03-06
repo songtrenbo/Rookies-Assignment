@@ -12,6 +12,7 @@ namespace CustomerSite.Mapping
     {
         public ImageAutoMapping()
         {
+            //Mapping Image and ImageVM
             CreateMap<Image, ImageVM>().ReverseMap();
         }
     }

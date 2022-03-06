@@ -9,27 +9,25 @@ using System.Threading.Tasks;
 
 namespace CustomerSite.Services
 {
-    public class ImageService : IImageService
+    public class CategoriesService : ICategoriesService
     {
-
-        private readonly IHttpClientFactory _clientFactory;
+        private readonly System.Net.Http.IHttpClientFactory _clientFactory;
 
         private readonly IConfiguration _configuration;
 
-        public ImageService(IHttpClientFactory clientFactory, IConfiguration configuration)
+        public CategoriesService(IHttpClientFactory clientFactory, IConfiguration configuration)
         {
             _clientFactory = clientFactory;
             _configuration = configuration;
         }
-        public async Task<IEnumerable<Image>> GetImages(int productId)
+        public async Task<IEnumerable<Category>> GetCategories()
         {
             var client = _clientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
-            var response = await client.GetAsync("/api/Images?id="+productId);
+            var response = await client.GetAsync("/api/Categories");
             var body = await response.Content.ReadAsStringAsync();
-            var images = JsonConvert.DeserializeObject<List<Image>>(body);
-            return (IEnumerable<Image>)images;
+            var categories = JsonConvert.DeserializeObject<List<Category>>(body);
+            return (IEnumerable<Category>)categories;
         }
-
     }
 }

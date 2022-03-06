@@ -10,22 +10,21 @@ namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ImagesController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
-        private readonly IImageRepository imageRepository;
+        private readonly ICategoryRepository categoryRepository;
 
-        public ImagesController(IImageRepository imageRepository)
+        public CategoriesController(ICategoryRepository categoryRepository)
         {
-            this.imageRepository = imageRepository;
+            this.categoryRepository = categoryRepository;
         }
-
-        //Get a list images of 1 product use product ID
+        //Get a list of Categories
         [HttpGet]
-        public async Task<ActionResult> GetImages(int id)
+        public async Task<ActionResult> GetCategoies()
         {
             try
             {
-                return Ok(await imageRepository.GetImages(id));
+                return Ok(await categoryRepository.GetCategoies());
             }
             catch (Exception)
             {
