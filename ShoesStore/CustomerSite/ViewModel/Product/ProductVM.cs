@@ -21,6 +21,7 @@ namespace CustomerSite.ViewModel.Product
         public string BrandName { get; set; }
         public int Stock { get; set; }
         public string Path { get; set; }
+        public int SizeId { get; set; }
         public double SizeName { get; set; }
     }
 }

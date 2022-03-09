@@ -5,6 +5,7 @@ using CustomerSite.Services;
 using CustomerSite.ViewModel.Category;
 using CustomerSite.ViewModel.Image;
 using CustomerSite.ViewModel.Product;
+using CustomerSite.ViewModel.Size;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -21,12 +22,14 @@ namespace CustomerSite.Controllers
         private readonly IProductService _productService;
         private readonly IImageService _imageService;
         private readonly ICategoriesService _categoriesService;
+        private readonly ISizeService _sizeService;
         private readonly IMapper _mapper;
-        public HomeController(IProductService productService, IImageService imageService, ICategoriesService categoriesService,IMapper mapper)
+        public HomeController(IProductService productService, IImageService imageService, ICategoriesService categoriesService, ISizeService sizeService,IMapper mapper)
         {
             _productService = productService;
             _imageService = imageService;
             _categoriesService = categoriesService;
+            _sizeService = sizeService;
             _mapper = mapper;
         }
         //[BindProperty]
@@ -48,6 +51,9 @@ namespace CustomerSite.Controllers
             var dataProduct = await _productService.GetProduct(id);
             var productMapping = _mapper.Map<ProductVM>(dataProduct);
 
+            var dataSize = await _sizeService.GetSizesByProductId(id);
+            ViewBag.Sizes = _mapper.Map<IEnumerable<SizeVM>>(dataSize);
+
             var dataImage = await _imageService.GetImages(id);
             ViewBag.Images = _mapper.Map<IEnumerable<ImageVM>>(dataImage);         
             return View(productMapping);
@@ -59,24 +65,20 @@ namespace CustomerSite.Controllers
             var dataCategories = await _categoriesService.GetCategories();
             var categoryMapping = _mapper.Map<IEnumerable<CategoryVM>>(dataCategories);
             ViewBag.Categories = categoryMapping;
-            if (categoryId == -1)
+            if (categoryId == 0)
             {
                 var dataProducts = await _productService.GetProducts();
                 var productMapping = _mapper.Map<IEnumerable<ProductVM>>(dataProducts);
+                ViewBag.CategorieName = "ALL PRODUCTS";
                 return View(productMapping);
             }
             else
             {
                 var dataProducts = await _productService.GetProductsByCategory(categoryId);
                 var productMapping = _mapper.Map<IEnumerable<ProductVM>>(dataProducts);
+                ViewBag.CategorieName = categoryMapping.Where(s => s.CategoryId == categoryId).FirstOrDefault().CategoryName;
                 return View(productMapping);
             }
         }
-        //public ShowProductByCategoryId(int categoryId)
-        //{
-        //    var dataProducts = _productService.GetProductsByCategory(categoryId);
-        //    var productMapping = _mapper.Map<IEnumerable<ProductVM>>(dataProducts);
-        //    return RedirectToAction(productMapping);
-        //}
     }
 }

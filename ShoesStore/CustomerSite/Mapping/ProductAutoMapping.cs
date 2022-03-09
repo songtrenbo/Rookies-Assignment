@@ -17,6 +17,7 @@ namespace CustomerSite.Mapping
                 .ForMember(q=>q.BrandName, otp => otp.MapFrom(s=>s.Brand.BrandName))
                 .ForMember(q=>q.CategoryName, otp => otp.MapFrom(s=>s.Category.CategoryName))
                 .ForMember(q=>q.Path, otp => otp.MapFrom(s=>s.Images.FirstOrDefault().Path))
+                .ForMember(q=>q.SizeId, otp=>otp.MapFrom(s=>s.SizeProducts.FirstOrDefault().SizeId))
                 .ReverseMap();
 
             //Mapping Product and Top9NewProductVM

@@ -4,7 +4,6 @@
     ViewData["Title"] = "Shop";
 }
 
-
 <!-- Start Content -->
 <div class="container py-5">
     <div class="row">
@@ -12,65 +11,103 @@
         <div class="col-lg-3">
             <h1 class="h2 pb-4">Categories</h1>
             <div class="list-unstyled templatemo-accordion">
+                <a class="d-flex justify-content-between h3 text-decoration-none categories" href="@Url.Action("Shop","Home", new { categoryId = 0})">
+                    ALL
+                </a>
                 @foreach (var item in ViewBag.Categories)
                 {
-                        <a class="d-flex justify-content-between h3 text-decoration-none categories" href="@Url.Action("Shop","Home", new { categoryId = item.CategoryId})">
-                            @item.CategoryName
-                        </a>
-                }               
+                    <a class="d-flex justify-content-between h3 text-decoration-none categories" href="@Url.Action("Shop","Home", new { categoryId = item.CategoryId})">
+                        @item.CategoryName
+                    </a>
+                }
             </div>
         </div>
 
         <div class="col-lg-9">
             <div class="row">
-                <div class="col-md-6 pb-4">
-                    <div class="d-flex">
-                        <select class="form-control">
-                            <option>Featured</option>
-                            <option>A to Z</option>
-                            <option>Item</option>
-                        </select>
-                    </div>
+                <div class="col-md-6 pb-4">              
+                    <h3>@ViewBag.CategorieName</h3>
                 </div>
             </div>
 
             <div class="row">
                 @foreach (var item in Model)
                 {
-                    <div class="col-md-4">
-                        <div class="card mb-4 product-wap rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="@item.Path" style=" height: 200px; object-fit: contain ">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        @*<li><a class="btn btn-success text-white" href=""><i class="far fa-heart"></i></a></li>*@
-                                        <li><a class="btn btn-success text-white mt-2" href="@Url.Action("ProductDetail","Home", new { id = item.ProductId })"><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href=""><i class="fas fa-cart-plus"></i></a></li>
+                    if (item.Stock > 0)
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-4 product-wap rounded-0">
+                                <div class="card rounded-0">
+                                    <img class="card-img rounded-0 img-fluid" src="@item.Path" style=" height: 200px; object-fit: contain ">
+                                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                        <ul class="list-unstyled">
+                                            @*<li><a class="btn btn-success text-white" href=""><i class="far fa-heart"></i></a></li>*@
+                                            <li><a class="btn btn-success text-white mt-2" href="@Url.Action("ProductDetail","Home", new { id = item.ProductId })"><i class="far fa-eye"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2" href=""><i class="fas fa-cart-plus"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center">
+                                    @if (item.ProductName.Length > 25)
+                                    {
+                                        <a href="@Url.Action("ProductDetail","Home", new { id = item.ProductId })" class="h3 text-decoration-none">@item.ProductName.Substring(0, 24) ...</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="shop-single.html" class="h3 text-decoration-none">@item.ProductName</a>
+                                    }
+                                    <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                        <li>
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                        </li>
                                     </ul>
+                                    <p class="text-center mb-0">$@item.Price</p>
                                 </div>
                             </div>
-                            <div class="card-body text-center">
-                                @if (item.ProductName.Length > 25)
-                                {
-                                    <a href="@Url.Action("ProductDetail","Home", new { id = item.ProductId })" class="h3 text-decoration-none">@item.ProductName.Substring(0, 24) ...</a>
-                                }
-                                else
-                                {
-                                    <a href="shop-single.html" class="h3 text-decoration-none">@item.ProductName</a>
-                                }
-                                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                                    <li>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
-                                    </li>
-                                </ul>
-                                <p class="text-center mb-0">$@item.Price</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-4 product-wap rounded-0">
+                                <div class="card rounded-0">
+                                    <img class="card-img rounded-0 img-fluid" src="@item.Path" style=" height: 200px; object-fit: contain ">
+                                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                        <ul class="list-unstyled">
+                                            @*<li><a class="btn btn-success text-white" href=""><i class="far fa-heart"></i></a></li>*@
+                                            <li><a class="btn btn-success text-white mt-2" href="@Url.Action("ProductDetail","Home", new { id = item.ProductId })"><i class="far fa-eye"></i></a></li>
+                                            @*<li><a class="btn btn-success text-white mt-2" href=""><i class="fas fa-cart-plus"></i></a></li>*@
+                                            <li><a class="btn btn-danger text-white mt-2 disabled">&nbsp;<i class="fas fa-times"></i>&nbsp;</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center">
+                                    @if (item.ProductName.Length > 25)
+                                    {
+                                        <a href="@Url.Action("ProductDetail","Home", new { id = item.ProductId })" class="h3 text-decoration-none">@item.ProductName.Substring(0, 24) ...</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="shop-single.html" class="h3 text-decoration-none">@item.ProductName</a>
+                                    }
+                                    <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                        <li>
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                        </li>
+                                    </ul>
+                                    <p class="text-center mb-0">$@item.Price</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 }
 
             </div>
