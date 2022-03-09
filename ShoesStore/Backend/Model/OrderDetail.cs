@@ -14,7 +14,7 @@ namespace Backend.Models
         public int OrderDetailsId { get; set; }
         public double ProductPrice { get; set; }
         public int ProductQty { get; set; }
-        public int Subtotal { get; set; }
+        public double Subtotal { get; set; }
         public int OrderId { get; set; }
         public int ProductId { get; set; }
 

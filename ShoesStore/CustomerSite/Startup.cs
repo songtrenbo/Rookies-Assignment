@@ -34,10 +34,12 @@ namespace CustomerSite
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<ISizeService, SizeService>();
             services.AddScoped<ICategoriesService, CategoriesService>();
+            services.AddScoped<IRateService, RateService>();
             services.AddAutoMapper(c => c.AddProfile<ProductAutoMapping>(), typeof(Startup));
             services.AddAutoMapper(c => c.AddProfile<ImageAutoMapping>(), typeof(Startup));
             services.AddAutoMapper(c => c.AddProfile<CategoryAutoMapping>(), typeof(Startup));
             services.AddAutoMapper(c => c.AddProfile<SizeAutoMapping>(), typeof(Startup));
+            services.AddAutoMapper(c => c.AddProfile<RateAutoMapping>(), typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -88,12 +88,28 @@
                             <h1 class="h2">@Model.ProductName</h1>
                             <p class="h3 py-2">$@Model.Price</p>
                             <p class="py-2">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
+                                @if (ViewBag.Points > 0)
+                                {
+                                    @for (double i = 0; i < ViewBag.Points; i++)
+                                    {
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                    }
+                                    @for (double i = 5 - ViewBag.Points; i > 0; i--)
+                                    {
+                                        <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                                    }
+                                    <span class="list-inline-item text-dark">Rating @ViewBag.Points | @ViewBag.RateNComment.Count Comments</span>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                                    <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                                    <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                                    <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                                    <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                                    <span class="list-inline-item text-dark">Rating 0 | 0 Comment</span>
+                                }
+
                             </p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
@@ -251,12 +267,15 @@ else
                             <h1 class="h2">@Model.ProductName</h1>
                             <p class="h3 py-2">$@Model.Price</p>
                             <p class="py-2">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
+                                @for (int i = 0; i < ViewBag.Points; i++)
+                                {
+                                    <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                }
+                                @for (int i = 5 - ViewBag.Points; i > 0; i--)
+                                {
+                                    <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                                }
+                                <span class="list-inline-item text-dark">Rating @ViewBag.Points | @ViewBag.RateNComment.Count Comments</span>
                             </p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
@@ -271,7 +290,7 @@ else
                                     <h6>Stock:</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                        <p class="text-danger"><strong>Out of Stock</strong></p>                                    
+                                    <p class="text-danger"><strong>Out of Stock</strong></p>
                                 </li>
                             </ul>
                             <h6>Description:</h6>
@@ -322,5 +341,88 @@ else
         </div>
     </section>
     <!-- Close Content -->
-
 }
+
+<!-- Open Comments -->
+<div class="container justify-content-center mt-5">
+
+    <h2>Comments (@ViewBag.RateNComment.Count)</h2>
+    <hr />
+    @foreach (var itemRateNComment in ViewBag.RateNComment)
+    {
+        <div class="row second">
+            <div class="row ">
+                <div class="col-md-1 col-lg-1 center-block">
+                    <center>
+                        <img src="https://th.bing.com/th/id/R.0bc367260dae1a1cb7dbf54000b94380?rik=f8SDvASU9c6Tag&riu=http%3a%2f%2fimg.freepik.com%2ffree-icon%2fuser-image-with-black-background_318-34564.jpg%3fsize%3d338%26ext%3djpg&ehk=RkIb3s79a9aHd6RtEyIihv5lXf3A689F6Fx%2fiFOWEUs%3d&risl=&pid=ImgRaw&r=0" width="50">
+
+                    </center>
+                </div>
+                <div class="col-md-4 col-lg-2 align-self-center">
+                    <span class="text2">@itemRateNComment.UserName</span>
+                </div>
+                <div class="col-md-7 col-lg-9 align-self-center float-end">
+                    @if (itemRateNComment.Points > 0)
+                    {
+                        @for (double i = 0; i < itemRateNComment.Points; i++)
+                        {
+                            <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                        }
+                        @for (double i = 5 - itemRateNComment.Points; i > 0; i--)
+                        {
+                            <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                        }
+                    }
+                    else
+                    {
+                        <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                        <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                        <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                        <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                        <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+
+                </div>
+                <div class="col-lg-11">
+                    <span class="text1">@itemRateNComment.Content</span>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+
+<!-- Close Comments -->
+
+
+
+<style>
+
+    .second {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 5px 5px 5px #aaaaaa;
+        border: 1px solid gray;
+    }
+
+    .text1 {
+        font-size: 20px;
+        font-weight: 500;
+        color: #56575b;
+        margin-left: 6px;
+    }
+
+    .text2 {
+        font-size: 23px;
+        font-weight: 500;
+        margin-left: 6px;
+        color: #56575b
+    }
+</style>

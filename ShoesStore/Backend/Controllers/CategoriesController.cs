@@ -12,11 +12,11 @@ namespace Backend.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly ICategoryRepository categoryRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
         public CategoriesController(ICategoryRepository categoryRepository)
         {
-            this.categoryRepository = categoryRepository;
+            _categoryRepository = categoryRepository;
         }
         //Get a list of Categories
         [HttpGet]
@@ -24,7 +24,7 @@ namespace Backend.Controllers
         {
             try
             {
-                return Ok(await categoryRepository.GetCategoies());
+                return Ok(await _categoryRepository.GetCategoies());
             }
             catch (Exception)
             {

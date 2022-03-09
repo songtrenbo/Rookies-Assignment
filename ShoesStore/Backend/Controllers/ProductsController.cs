@@ -13,11 +13,11 @@ namespace Backend.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductRepository productRepository;
+        private readonly IProductRepository _productRepository;
 
         public ProductsController(IProductRepository productRepository)
         {
-            this.productRepository = productRepository;
+            _productRepository = productRepository;
         }
 
         //Get a list of products
@@ -26,7 +26,7 @@ namespace Backend.Controllers
         {
             try
             {
-                return Ok(await productRepository.GetProducts());
+                return Ok(await _productRepository.GetProducts());
             }
             catch (Exception)
             {
@@ -41,7 +41,7 @@ namespace Backend.Controllers
         {
             try
             {
-                var result = await productRepository.GetProduct(id);
+                var result = await _productRepository.GetProduct(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -66,7 +66,7 @@ namespace Backend.Controllers
                     return BadRequest();
                 }
 
-                var createProduct = await productRepository.AddProduct(product);
+                var createProduct = await _productRepository.AddProduct(product);
                 return CreatedAtAction(nameof(GetProduct), new { id = createProduct.ProductId },
                     createProduct);
             }
@@ -83,14 +83,14 @@ namespace Backend.Controllers
         {
             try
             {
-                var productToDelete = await productRepository.GetProduct(id);
+                var productToDelete = await _productRepository.GetProduct(id);
 
                 if (productToDelete == null)
                 {
                     return NotFound($"Product with Id = {id} not found");
                 }
 
-                return await productRepository.DeleteProduct(id);
+                return await _productRepository.DeleteProduct(id);
             }
             catch (Exception)
             {
@@ -109,14 +109,14 @@ namespace Backend.Controllers
                 {
                     return BadRequest("Product ID mismatch");
                 }
-                var productToUpdate = await productRepository.GetProduct(id);
+                var productToUpdate = await _productRepository.GetProduct(id);
 
                 if (productToUpdate == null)
                 {
                     return NotFound($"Product with Id = {id} not found");
                 }
 
-                return await productRepository.UpdateProduct(product);
+                return await _productRepository.UpdateProduct(product);
             }
             catch (Exception)
             {
@@ -131,7 +131,7 @@ namespace Backend.Controllers
         {
             try
             {
-                return Ok(await productRepository.GetTop9NewProduct());
+                return Ok(await _productRepository.GetTop9NewProduct());
             }
             catch (Exception)
             {
@@ -146,7 +146,7 @@ namespace Backend.Controllers
         {
             try
             {
-                return Ok(await productRepository.GetProductsByCategory(id));
+                return Ok(await _productRepository.GetProductsByCategory(id));
             }
             catch (Exception)
             {

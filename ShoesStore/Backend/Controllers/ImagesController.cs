@@ -12,11 +12,11 @@ namespace Backend.Controllers
     [ApiController]
     public class ImagesController : ControllerBase
     {
-        private readonly IImageRepository imageRepository;
+        private readonly IImageRepository _imageRepository;
 
         public ImagesController(IImageRepository imageRepository)
         {
-            this.imageRepository = imageRepository;
+            _imageRepository = imageRepository;
         }
 
         //Get a list images of 1 product use product ID
@@ -25,7 +25,7 @@ namespace Backend.Controllers
         {
             try
             {
-                return Ok(await imageRepository.GetImages(id));
+                return Ok(await _imageRepository.GetImages(id));
             }
             catch (Exception)
             {

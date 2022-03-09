@@ -13,11 +13,11 @@ namespace Backend.Api.Controllers
     [ApiController]
     public class BrandsController : ControllerBase
     {
-        private readonly IBrandRepository brandRepository;
+        private readonly IBrandRepository _brandRepository;
 
         public BrandsController(IBrandRepository brandRepository)
         {
-            this.brandRepository = brandRepository;
+            _brandRepository = brandRepository;
         }
 
         //Get a list of brands
@@ -26,7 +26,7 @@ namespace Backend.Api.Controllers
         {
             try
             {
-                return Ok(await brandRepository.GetBrands());
+                return Ok(await _brandRepository.GetBrands());
             }
             catch (Exception)
             {
@@ -41,7 +41,7 @@ namespace Backend.Api.Controllers
         {
             try
             {
-                var result = await brandRepository.GetBrand(id);
+                var result = await _brandRepository.GetBrand(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -66,7 +66,7 @@ namespace Backend.Api.Controllers
                     return BadRequest();
                 }
 
-                var createBrand = await brandRepository.AddBrand(brand);
+                var createBrand = await _brandRepository.AddBrand(brand);
                 return CreatedAtAction(nameof(GetBrand), new { id = createBrand.BrandId},
                     createBrand);
             }
@@ -87,14 +87,14 @@ namespace Backend.Api.Controllers
                 {
                     return BadRequest("Brand ID mismatch");
                 }
-                var brandToUpdate = await brandRepository.GetBrand(id);
+                var brandToUpdate = await _brandRepository.GetBrand(id);
                 
                 if(brandToUpdate == null)
                 {
                     return NotFound($"Brand with Id = {id} not found");
                 }
 
-                return await brandRepository.UpdateBrand(brand);
+                return await _brandRepository.UpdateBrand(brand);
             }
             catch (Exception)
             {
@@ -109,14 +109,14 @@ namespace Backend.Api.Controllers
         {
             try
             {
-                var brandToDelete = await brandRepository.GetBrand(id);
+                var brandToDelete = await _brandRepository.GetBrand(id);
 
                 if(brandToDelete == null)
                 {
                     return NotFound($"Brand with Id = {id} not found");
                 }
 
-                return await brandRepository.DeleteBrand(id);
+                return await _brandRepository.DeleteBrand(id);
             }
             catch (Exception)
             {

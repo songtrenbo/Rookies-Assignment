@@ -352,6 +352,47 @@ namespace Backend.Data.SeedData
                 new Image { ImageId = 113, CreateDate = DateTime.Parse("2022-01-05 05:35:51"), UpdateDate = DateTime.Parse("2022-01-05 05:35:51"), ProductId = 35, Path = "https://m.media-amazon.com/images/I/81FpRIxhYML._AC_SX500._SX._UX._SY._UY_.jpg" },
                 new Image { ImageId = 114, CreateDate = DateTime.Parse("2022-01-05 05:35:51"), UpdateDate = DateTime.Parse("2022-01-05 05:35:51"), ProductId = 35, Path = "https://m.media-amazon.com/images/I/81elz8mIVhL._AC_SX500._SX._UX._SY._UY_.jpg" }
              );
+
+            //Data of order
+            modelBuilder.Entity<Order>().HasData(
+                new Order { OrderId = 1, UserId = 2, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 335 },
+                new Order { OrderId = 2, UserId = 2, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 167.5 },
+                new Order { OrderId = 3, UserId = 2, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 167.5 },
+                new Order { OrderId = 4, UserId = 3, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 167.5 },
+                new Order { OrderId = 5, UserId = 3, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 325 },
+                new Order { OrderId = 6, UserId = 3, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-03-15 05:35:51"), OrderTotal = 74.95 },
+                new Order { OrderId = 7, UserId = 3, Status = 1, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 74.95 },
+                new Order { OrderId = 8, UserId = 4, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 224.85 },
+                new Order { OrderId = 9, UserId = 4, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 150.98 },
+                new Order { OrderId = 10, UserId = 4, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 150.98 }
+                );
+            //Data of order detail
+            modelBuilder.Entity<OrderDetail>().HasData(
+                new OrderDetail { OrderDetailsId = 1, OrderId = 1, ProductId = 1, ProductQty = 2, ProductPrice = 167.5, Subtotal = 335 },
+                new OrderDetail { OrderDetailsId = 2, OrderId = 2, ProductId = 1, ProductQty = 1, ProductPrice = 167.5, Subtotal = 167.5 },
+                new OrderDetail { OrderDetailsId = 3, OrderId = 3, ProductId = 1, ProductQty = 1, ProductPrice = 167.5, Subtotal = 167.5 },
+                new OrderDetail { OrderDetailsId = 4, OrderId = 4, ProductId = 1, ProductQty = 1, ProductPrice = 167.5, Subtotal = 167.5 },
+                new OrderDetail { OrderDetailsId = 5, OrderId = 5, ProductId = 1, ProductQty = 2, ProductPrice = 167.5, Subtotal = 335 },
+                new OrderDetail { OrderDetailsId = 6, OrderId = 6, ProductId = 2, ProductQty = 1, ProductPrice = 74.95, Subtotal = 74.95 },
+                new OrderDetail { OrderDetailsId = 7, OrderId = 7, ProductId = 2, ProductQty = 1, ProductPrice = 74.95, Subtotal = 74.95 },
+                new OrderDetail { OrderDetailsId = 8, OrderId = 8, ProductId = 2, ProductQty = 3, ProductPrice = 74.95, Subtotal = 224.85 },
+                new OrderDetail { OrderDetailsId = 9, OrderId = 9, ProductId = 3, ProductQty = 2, ProductPrice = 75.49, Subtotal = 150.98 },
+                new OrderDetail { OrderDetailsId = 10, OrderId = 10, ProductId = 3, ProductQty = 2, ProductPrice = 75.49, Subtotal = 150.98 }
+                );
+
+           //Data of rating
+           modelBuilder.Entity<Rate>().HasData(
+                new Rate { RateId = 1, ProductId = 1, OrderId = 1, UserId = 2, Points = 5, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Nice shoes, i love it" },
+                new Rate { RateId = 2, ProductId = 1, OrderId = 2, UserId = 2, Points = 4, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "I'm really like this shoes" },
+                new Rate { RateId = 3, ProductId = 1, OrderId = 3, UserId = 2, Points = 4, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Wow, what a nice shoes!!!" },
+                new Rate { RateId = 4, ProductId = 1, OrderId = 4, UserId = 3, Points = 3, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Good shoes but i don't really like this shoes style" },
+                new Rate { RateId = 5, ProductId = 1, OrderId = 5, UserId = 3, Points = 5, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Amazing, Good shoes, good style" },
+                new Rate { RateId = 6, ProductId = 2, OrderId = 6, UserId = 3, Points = 1, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Is this a joke? I bought this shoes and it took about 1 month to get to me, Why? And why it got dirty everywhere on my shoes?" },
+                new Rate { RateId = 7, ProductId = 2, OrderId = 7, UserId = 3, Points = 1, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "What is this? How can i wear this shoes? It look so difference than the picture on the shop!" },
+                new Rate { RateId = 8, ProductId = 2, OrderId = 8, UserId = 4, Points = 3, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "I think this shoes is ok with me" },
+                new Rate { RateId = 9, ProductId = 3, OrderId = 9, UserId = 4, Points = 4, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Ohhhh this shoes is lovely. You guys should buy this one!" },
+                new Rate { RateId = 10, ProductId = 3, OrderId = 10, UserId = 4, Points = 2, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "It good but i don't like it!!!" }
+                );
         }
     }
 }
