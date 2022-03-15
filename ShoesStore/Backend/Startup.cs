@@ -1,3 +1,4 @@
+using Backend.Data.Migrations;
 using Backend.Models;
 using Backend.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -47,6 +48,18 @@ namespace Backend
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISizeRepository, SizeRepository>();
             services.AddScoped<IRateRepository, RateRepository>();
+            services.AddAutoMapper(c => c.AddProfile<AutoMapperProfile>(), typeof(Startup));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigins",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +74,7 @@ namespace Backend
 
             app.UseHttpsRedirection();
 
+            app.UseCors("AllowOrigins");
             app.UseRouting();
 
             app.UseAuthorization();

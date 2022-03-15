@@ -2,6 +2,7 @@
 using Backend.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Dto.Brand;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Backend.Api.Controllers
         }
 
         //Get a list of brands
-        [HttpGet]
+        [HttpGet("/List")]
         public async Task<ActionResult> GetBrands()
         {
             try
@@ -122,6 +123,21 @@ namespace Backend.Api.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                                   "Error deleting data");
+            }
+        }
+
+        //Get a list of brands with pages, search, sort
+        [HttpGet]
+        public async Task<ActionResult> GetBrandsPages([FromQuery] BrandCriteriaDto brandCriteriaDto)
+        {
+            try
+            {
+                return Ok(await _brandRepository.Get(brandCriteriaDto));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
             }
         }
     }
