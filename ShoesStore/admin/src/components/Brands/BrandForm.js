@@ -7,25 +7,25 @@ import { NotificationManager } from 'react-notifications';
 import TextField from '../../shared-components/FormInputs/TextField';
 import SelectField from '../../shared-components/FormInputs/SelectField';
 import { BRAND } from '../../Constants/pages';
-import { NormalBrandType } from "../../Constants/Brand/BrandConstants";
+// import { NormalBrandType } from "../../Constants/Brand/BrandConstants";
 import { createBrandRequest, UpdateBrandRequest } from "./services/request";
 
-const initialFormValues = {
-    name: '',
-    type: NormalBrandType
-};
+// const initialFormValues = {
+//     name: '',
+//     type: NormalBrandType
+// };
 
 const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Required'),
-    type: Yup.string().required('Required')
+    brandName: Yup.string().required('Required')
+    // type: Yup.string().required('Required')
 });
 
 const BrandFormContainer = ({ initialBrandForm = {
-    ...initialFormValues
+    // ...initialFormValues
 } }) => {
     const [loading, setLoading] = useState(false);
 
-    const isUpdate = initialBrandForm.id ? true : false;
+    const isUpdate = initialBrandForm.brandId ? true : false;
 
     const history = useHistory();
 
@@ -51,7 +51,7 @@ const BrandFormContainer = ({ initialBrandForm = {
         let data = await UpdateBrandRequest(form.formValues);
         if (data)
         {
-            handleResult(true, data.name);
+            handleResult(true, data.brandName);
         }
     }
 
@@ -60,7 +60,7 @@ const BrandFormContainer = ({ initialBrandForm = {
         let data = await createBrandRequest(form.formValues);
         if (data)
         {
-            handleResult(true, data.name);
+            handleResult(true, data.brandName);
         }
     }
 
@@ -87,20 +87,10 @@ const BrandFormContainer = ({ initialBrandForm = {
             {(actions) => (
                 <Form className='intro-y col-lg-6 col-12'>
                     <TextField 
-                        name="name" 
-                        label="Name" 
+                        name="brandName" 
+                        label="BrandName" 
                         placeholder="input brand name" 
-                        isrequired 
-                        disabled={isUpdate ? true : false} />
-                    {/* <SelectField 
-                        name="type" 
-                        label="Type" 
-                        options={BrandTypeOptions} 
-                        isrequired /> */}
-                    {/* <FileUpload 
-                        name="imageFile" 
-                        label="Image" 
-                        image={actions.values.imagePath} /> */}
+                        isrequired />
                     
                     <div className="d-flex">
                         <div className="ml-auto">
@@ -109,7 +99,7 @@ const BrandFormContainer = ({ initialBrandForm = {
                             >
                                 Save {(loading) && <img src="/oval.svg" className='w-4 h-4 ml-2 inline-block' />}
                             </button>
-
+                            &emsp;
                             <Link to={BRAND} className="btn btn-outline-secondary ml-2">
                                 Cancel
                             </Link>

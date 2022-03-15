@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 using Backend.Extensions;
+using Shared;
 
 namespace Backend.Repositories
 {
@@ -24,8 +25,13 @@ namespace Backend.Repositories
             _mapper = mapper;
         }
 
-        public async Task<Brand> AddBrand(Brand brand)
+        public async Task<Brand> AddBrand([FromForm] BrandCreateRequest brandCreateRequest)
         {
+            var brand = new Brand {
+                BrandName = brandCreateRequest.BrandName
+            };
+
+
             var result = await _shoesStoreDatabaseContext.Brands.AddAsync(brand);
             await _shoesStoreDatabaseContext.SaveChangesAsync();
             return result.Entity;
@@ -51,14 +57,15 @@ namespace Backend.Repositories
         {
             return await _shoesStoreDatabaseContext.Brands.ToListAsync();
         }
-        public async Task<Brand> UpdateBrand(Brand brand)
+        public async Task<Brand> UpdateBrand(int id, [FromForm] BrandCreateRequest brandCreateRequest)
         {
-            var result = await _shoesStoreDatabaseContext.Brands.FirstOrDefaultAsync(e => e.BrandId == brand.BrandId);
-            if (result != null)
+            var brand = await _shoesStoreDatabaseContext.Brands.FindAsync(id);
+            if (brand != null)
             {
-                result.BrandName = brand.BrandName;
+                brand.BrandName = brandCreateRequest.BrandName;
                 await _shoesStoreDatabaseContext.SaveChangesAsync();
-                return result;
+                _shoesStoreDatabaseContext.Brands.Update(brand);
+                return brand;
             }
             return null;
         }

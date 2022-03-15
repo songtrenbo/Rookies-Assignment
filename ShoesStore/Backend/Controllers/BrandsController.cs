@@ -2,6 +2,7 @@
 using Backend.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shared;
 using Shared.Dto.Brand;
 using System;
 using System.Collections.Generic;
@@ -58,16 +59,16 @@ namespace Backend.Api.Controllers
 
         //Create a new brand
         [HttpPost]
-        public async Task<ActionResult<Brand>> CreateBrand(Brand brand)
+        public async Task<ActionResult<Brand>> CreateBrand([FromForm] BrandCreateRequest brandCreateRequest)
         {
             try
             {
-                if(brand == null)
+                if(brandCreateRequest == null)
                 {
                     return BadRequest();
                 }
 
-                var createBrand = await _brandRepository.AddBrand(brand);
+                var createBrand = await _brandRepository.AddBrand(brandCreateRequest);
                 return CreatedAtAction(nameof(GetBrand), new { id = createBrand.BrandId},
                     createBrand);
             }
@@ -80,27 +81,41 @@ namespace Backend.Api.Controllers
 
         //Update 1 brand
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Brand>> UpdateBrand(int id, Brand brand)
+        public async Task<ActionResult<Brand>> UpdateBrand(int id, [FromForm] BrandCreateRequest brandCreateRequest)
         {
+            //try
+            //{
+            //    if (id != brand.BrandId)
+            //    {
+            //        return BadRequest("Brand ID mismatch");
+            //    }
+            //    var brandToUpdate = await _brandRepository.GetBrand(id);
+
+            //    if(brandToUpdate == null)
+            //    {
+            //        return NotFound($"Brand with Id = {id} not found");
+            //    }
+
+            //    return await _brandRepository.UpdateBrand(id, brandCreateRequest);
+            //}
+            //catch (Exception)
+            //{
+            //    return StatusCode(StatusCodes.Status500InternalServerError,
+            //                      "Error updating data");
+            //}
             try
             {
-                if (id != brand.BrandId)
+                if (brandCreateRequest == null)
                 {
-                    return BadRequest("Brand ID mismatch");
+                    return BadRequest();
                 }
-                var brandToUpdate = await _brandRepository.GetBrand(id);
-                
-                if(brandToUpdate == null)
-                {
-                    return NotFound($"Brand with Id = {id} not found");
-                }
-
-                return await _brandRepository.UpdateBrand(brand);
+                var updateBrand = await _brandRepository.UpdateBrand(id, brandCreateRequest);
+                return updateBrand;
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                                  "Error updating data");
+                                "Error retrieving data from the database");
             }
         }
 

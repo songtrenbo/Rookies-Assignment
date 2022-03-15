@@ -28,7 +28,7 @@ export function UpdateBrandRequest(brandForm) {
         formData.append(key, brandForm[key]);
     });
 
-    return RequestService.axios.put(EndPoints.brandId(brandForm.id ?? - 1), formData);
+    return RequestService.axios.put(EndPoints.brandId(brandForm.brandId ?? - 1), formData);
 }
 
 export function DisableBrandRequest(brandId) {

@@ -33,7 +33,7 @@ const BrandTable = ({
   const [brandDetail, setBrandDetail] = useState(null);
   const [disableState, setDisable] = useState({
     isOpen: false,
-    id: 0,
+    brandId: 0,
     title: "",
     message: "",
     isDisable: true,
@@ -52,9 +52,9 @@ const BrandTable = ({
   //   return id == LuxuryBrandType ? LuxyryBrandTypeLabel : NormalBrandTypeLabel;
   // };
 
-  const handleShowDisable = async (id) => {
+  const handleShowDisable = async (brandId) => {
     setDisable({
-      id,
+      brandId,
       isOpen: true,
       title: "Are you sure",
       message: "Do you want to disable this Brand?",
@@ -65,7 +65,7 @@ const BrandTable = ({
   const handleCloseDisable = () => {
     setDisable({
       isOpen: false,
-      id: 0,
+      brandId: 0,
       title: "",
       message: "",
       isDisable: true,
@@ -92,7 +92,7 @@ const BrandTable = ({
   };
 
   const handleConfirmDisable = async () => {
-    let isSuccess = await DisableBrandRequest(disableState.id);
+    let isSuccess = await DisableBrandRequest(disableState.brandId);
     if (isSuccess) {
       await handleResult(true, "");
     }
@@ -103,9 +103,9 @@ const BrandTable = ({
   };
 
   const history = useHistory();
-  const handleEdit = (id) => {
-    const existBrand = brands?.items.find((item) => item.id === Number(id));
-    history.push(EDIT_BRAND_ID(id), {
+  const handleEdit = (brandId) => {
+    const existBrand = brands?.items.find((item) => item.brandId === Number(brandId));
+    history.push(EDIT_BRAND_ID(brandId), {
       existBrand: existBrand,
     });
   };
