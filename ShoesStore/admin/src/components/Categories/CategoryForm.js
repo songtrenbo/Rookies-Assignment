@@ -6,39 +6,32 @@ import { NotificationManager } from 'react-notifications';
 
 import TextField from '../../shared-components/FormInputs/TextField';
 import SelectField from '../../shared-components/FormInputs/SelectField';
-import { BRAND } from '../../Constants/pages';
-// import { NormalBrandType } from "../../Constants/Brand/BrandConstants";
-import { createBrandRequest, UpdateBrandRequest } from "./services/request";
+import { CATEGORY } from '../../Constants/pages';
+import { createCategoryRequest, UpdateCategoryRequest } from "./services/request";
 
-// const initialFormValues = {
-//     name: '',
-//     type: NormalBrandType
-// };
 
 const validationSchema = Yup.object().shape({
-    brandName: Yup.string().required('Required')
-    // type: Yup.string().required('Required')
+    categoryName: Yup.string().required('Required')
 });
 
-const BrandFormContainer = ({ initialBrandForm = {
-    // ...initialFormValues
+const CategoryFormContainer = ({ initialCategoryForm = {
 } }) => {
     const [loading, setLoading] = useState(false);
 
-    const isUpdate = initialBrandForm.brandId ? true : false;
+    const isUpdate = initialCategoryForm.categoryId ? true : false;
 
     const history = useHistory();
 
     const handleResult = (result, message) => {
         if (result) {
             NotificationManager.success(
-                `${isUpdate ? 'Updated' : 'Created'} Successful Brand ${message}`,
+                `${isUpdate ? 'Updated' : 'Created'} Successful Category ${message}`,
                 `${isUpdate ? 'Update' : 'Create'} Successful`,
                 2000,
             );
 
             setTimeout(() => {
-                history.push(BRAND);
+                history.push(CATEGORY);
             }, 1000);
 
         } else {
@@ -46,27 +39,27 @@ const BrandFormContainer = ({ initialBrandForm = {
         }
     }
 
-    const updateBrandAsync = async (form) => {
-        console.log('update brand async');
-        let data = await UpdateBrandRequest(form.formValues);
+    const updateCategoryAsync = async (form) => {
+        console.log('update category async');
+        let data = await UpdateCategoryRequest(form.formValues);
         if (data)
         {
-            handleResult(true, data.brandName);
+            handleResult(true, data.categoryName);
         }
     }
 
-    const createBrandAsync = async (form) => {  
-        console.log('create brand async');
-        let data = await createBrandRequest(form.formValues);
+    const createCategoryAsync = async (form) => {  
+        console.log('create category async');
+        let data = await createCategoryRequest(form.formValues);
         if (data)
         {
-            handleResult(true, data.brandName);
+            handleResult(true, data.categoryName);
         }
     }
 
     return (
         <Formik
-            initialValues={initialBrandForm}
+            initialValues={initialCategoryForm}
             enableReinitialize
             validationSchema={validationSchema}
             onSubmit={(values) => {
@@ -74,10 +67,10 @@ const BrandFormContainer = ({ initialBrandForm = {
 
                 setTimeout(() => {
                     if (isUpdate) {
-                        updateBrandAsync({ formValues: values });
+                        updateCategoryAsync({ formValues: values });
                     }
                     else {
-                        createBrandAsync({ formValues: values });
+                        createCategoryAsync({ formValues: values });
                     }
 
                     setLoading(false);
@@ -87,9 +80,9 @@ const BrandFormContainer = ({ initialBrandForm = {
             {(actions) => (
                 <Form className='container intro-y col-lg-6 col-12'>
                     <TextField 
-                        name="brandName" 
-                        label="Brand Name" 
-                        placeholder="input brand name" 
+                        name="categoryName" 
+                        label="Category Name" 
+                        placeholder="input category name" 
                         isrequired />
                     
                     <div className="row">
@@ -99,7 +92,7 @@ const BrandFormContainer = ({ initialBrandForm = {
                                 Save {(loading) && <img src="/oval.svg" className='w-4 h-4 ml-2 inline-block' />}
                             </button>                            
                             <div className="col-lg-2"><br/></div>
-                            <Link to={BRAND} className="btn btn-outline-secondary col-lg-5 col-12">
+                            <Link to={CATEGORY} className="btn btn-outline-secondary col-lg-5 col-12">
                                 Cancel
                             </Link>
                     </div>
@@ -109,4 +102,4 @@ const BrandFormContainer = ({ initialBrandForm = {
     );
 }
 
-export default BrandFormContainer;
+export default CategoryFormContainer;

@@ -6,4 +6,9 @@ export const CREATE_BRAND = '/brand/create';
 export const EDIT_BRAND = '/brand/edit/:id';
 export const EDIT_BRAND_ID = (id) => `/brand/edit/${id}`;
 
+export const CATEGORY = '/category';
+export const CREATE_CATEGORY = '/category/create';
+export const EDIT_CATEGORY = '/category/edit/:id';
+export const EDIT_CATEGORY_ID = (id)=>`/category/edit/${id}`;
+
 export const NOTFOUND = '/notfound';

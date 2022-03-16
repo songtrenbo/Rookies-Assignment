@@ -24,7 +24,7 @@ namespace CustomerSite.Services
         {
             var client = _clientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
-            var response = await client.GetAsync("/api/Categories");
+            var response = await client.GetAsync("/api/Categories/List");
             var body = await response.Content.ReadAsStringAsync();
             var categories = JsonConvert.DeserializeObject<List<Category>>(body);
             return (IEnumerable<Category>)categories;

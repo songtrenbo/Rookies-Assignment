@@ -1,69 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { FunnelFill } from "react-bootstrap-icons";
 import { Search } from "react-feather";
-// import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 
 import { Link } from "react-router-dom";
-import BrandTable from "./BrandTable";
+import CategoryTable from "./CategoryTable";
 
-// import { FilterBrandTypeOptions } from "../../../Constants/selectOptions";
-import { getBrandsRequest } from "../services/request";
+import { getCategoriesRequest } from "../services/request";
 import {
   ACCSENDING,
   DECSENDING,
-  DEFAULT_BRAND_SORT_COLUMN_NAME,
+  DEFAULT_CATEGORY_SORT_COLUMN_NAME,
   DEFAULT_PAGE_LIMIT,
 } from "../../../Constants/paging";
 
-const ListBrand = () => {
+const ListCategory = () => {
   const [query, setQuery] = useState({
-    sortColumn: DEFAULT_BRAND_SORT_COLUMN_NAME,
+    sortColumn: DEFAULT_CATEGORY_SORT_COLUMN_NAME,
     limit: DEFAULT_PAGE_LIMIT,
     sortOrder: ACCSENDING,
     page: 1,
   });
 
   const [search, setSearch] = useState("");
-  const [brands, setBrands] = useState("");
-
-  // const [selectedType, setSelectedType] = useState([
-  //   { id: 1, label: "All", value: 0 },
-  // ]);
-
-  // const handleType = (selected) => {
-  //   if (selected.length === 0) {
-  //     setQuery({
-  //       ...query,
-  //       types: [],
-  //     });
-
-  //     setSelectedType([FilterBrandTypeOptions[0]]);
-  //     return;
-  //   }
-
-  //   const selectedAll = selected.find((item) => item.id === 1);
-
-  //   setSelectedType((prevSelected) => {
-  //     if (!prevSelected.some((item) => item.id === 1) && selectedAll) {
-  //       setQuery({
-  //         ...query,
-  //         types: [],
-  //       });
-
-  //       return [selectedAll];
-  //     }
-
-  //     const newSelected = selected.filter((item) => item.id !== 1);
-  //     const types = newSelected.map((item) => item.value);
-
-  //     setQuery({
-  //       ...query,
-  //       types,
-  //     });
-
-  //     return newSelected;
-  //   });
-  // };
+  const [categories, setCategories] = useState("");
 
   const handleChangeSearch = (e) => {
     e.preventDefault();
@@ -97,35 +56,28 @@ const ListBrand = () => {
   };
 
   const fetchDataCallbackAsync = async () => {
-    let data = await getBrandsRequest(query);
+    let data = await getCategoriesRequest(query);
     console.log("fetchDataCallbackAsync");
     console.log(data);
-    setBrands(data);
+    setCategories(data);
   };
 
   useEffect(() => {
     async function fetchDataAsync() {
-      let result = await getBrandsRequest(query);
-      setBrands(result.data);
+      let result = await getCategoriesRequest(query);
+      setCategories(result.data);
     }
 
     fetchDataAsync();
-  }, [query, brands]);
+  }, [query, categories]);
 
   return (
     <>
       <div className="container">
         <br />
-        <h2>Brand list</h2>
+        <h2>Category list</h2>
         <div className="d-flex intro-x">
           <div className="d-flex align-items-center w-md mr-5">
-            {/* <ReactMultiSelectCheckboxes
-              options={FilterBrandTypeOptions}
-              hideSearch={true}
-              placeholderButtonLabel="Type"
-              value={selectedType}
-              onChange={handleType}
-            /> */}
 
             <div className="border p-2">
               <FunnelFill />
@@ -147,14 +99,14 @@ const ListBrand = () => {
           </div>
           &ensp;
         <div className="d-flex">
-          <Link to="/brand/create" type="button" className="btn btn-danger">
-            Create new Brand
+          <Link to="/category/create" type="button" className="btn btn-danger">
+            Create new Category
           </Link>
         </div>
         </div>
         <br />
-        <BrandTable
-          brands={brands}
+        <CategoryTable
+          categories={categories}
           handlePage={handlePage}
           handleSort={handleSort}
           sortState={{
@@ -168,4 +120,4 @@ const ListBrand = () => {
   );
 };
 
-export default ListBrand;
+export default ListCategory;

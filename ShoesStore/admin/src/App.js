@@ -2,7 +2,8 @@ import React,{ lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/navbar";
 import InLineLoader from "./shared-components/InlineLoader";
-import { BRAND } from "./Constants/pages";
+import { BRAND, CATEGORY } from "./Constants/pages";
+import Category from "./components/Categories";
 const Brand = lazy(() => import('./components/Brands'));
 const SusspenseLoading = ({ children }) => (
   <Suspense fallback={<InLineLoader />}>
@@ -34,6 +35,9 @@ function App() {
          <Switch>
            <Route exact path="/">
              {/* <Home bootcamp={this.state.bootcamp} /> */}
+           </Route>
+           <Route path={CATEGORY}>
+             <Category />
            </Route>
            <Route path={BRAND}>
              <Brand />

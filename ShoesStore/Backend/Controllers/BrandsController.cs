@@ -23,7 +23,7 @@ namespace Backend.Api.Controllers
         }
 
         //Get a list of brands
-        [HttpGet("/List")]
+        [HttpGet("List")]
         public async Task<ActionResult> GetBrands()
         {
             try
@@ -83,26 +83,6 @@ namespace Backend.Api.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult<Brand>> UpdateBrand(int id, [FromForm] BrandCreateRequest brandCreateRequest)
         {
-            //try
-            //{
-            //    if (id != brand.BrandId)
-            //    {
-            //        return BadRequest("Brand ID mismatch");
-            //    }
-            //    var brandToUpdate = await _brandRepository.GetBrand(id);
-
-            //    if(brandToUpdate == null)
-            //    {
-            //        return NotFound($"Brand with Id = {id} not found");
-            //    }
-
-            //    return await _brandRepository.UpdateBrand(id, brandCreateRequest);
-            //}
-            //catch (Exception)
-            //{
-            //    return StatusCode(StatusCodes.Status500InternalServerError,
-            //                      "Error updating data");
-            //}
             try
             {
                 if (brandCreateRequest == null)

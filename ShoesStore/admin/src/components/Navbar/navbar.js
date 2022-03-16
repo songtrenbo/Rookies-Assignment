@@ -38,11 +38,9 @@ const navbar = () => {
                     Products{" "}
                   </a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="about.html">
-                    Categories
-                  </a>
-                </li>
+                <Link to="/category" className="nav-link">
+                  <li className="nav-item">Categories</li>
+                </Link>
                 <li className="nav-item">
                   <a className="nav-link" href="#">
                     Customers
