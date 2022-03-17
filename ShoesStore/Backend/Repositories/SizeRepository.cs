@@ -9,14 +9,14 @@ namespace Backend.Repositories
 {
     public class SizeRepository : ISizeRepository
     {
-        private readonly ShoesStoreDatabaseContext shoesStoreDatabaseContext;
+        private readonly ShoesStoreDatabaseContext _shoesStoreDatabaseContext;
         public SizeRepository(ShoesStoreDatabaseContext shoesStoreDatabaseContext)
         {
-            this.shoesStoreDatabaseContext = shoesStoreDatabaseContext;
+            _shoesStoreDatabaseContext = shoesStoreDatabaseContext;
         }
         public async Task<IEnumerable<SizeProduct>> GetSizesByProductId(int productId)
         {
-            return await shoesStoreDatabaseContext.SizeProducts
+            return await _shoesStoreDatabaseContext.SizeProducts
                 .Where(s => s.ProductId == productId)
                 .Include(e=>e.Size)
                 .OrderBy(e=>e.Size.SizeName)

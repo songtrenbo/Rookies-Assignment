@@ -9,16 +9,16 @@ namespace Backend.Repositories
 {
     public class ImageRepository : IImageRepository
     {
-        private readonly ShoesStoreDatabaseContext shoesStoreDatabaseContext;
+        private readonly ShoesStoreDatabaseContext _shoesStoreDatabaseContext;
 
         public ImageRepository(ShoesStoreDatabaseContext shoesStoreDatabaseContext)
         {
-            this.shoesStoreDatabaseContext = shoesStoreDatabaseContext;
+            _shoesStoreDatabaseContext = shoesStoreDatabaseContext;
         }
 
         public async Task<IEnumerable<Image>> GetImages(int productId)
         {
-            return await shoesStoreDatabaseContext.Images.Where(e => e.ProductId == productId).ToListAsync();
+            return await _shoesStoreDatabaseContext.Images.Where(e => e.ProductId == productId).ToListAsync();
         }
     }
 }

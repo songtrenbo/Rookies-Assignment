@@ -2,6 +2,8 @@
 using Backend.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shared;
+using Shared.Dto.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +23,7 @@ namespace Backend.Controllers
         }
 
         //Get a list of products
-        [HttpGet]
+        [HttpGet("List")]
         public async Task<ActionResult> GetProducts()
         {
             try
@@ -57,16 +59,16 @@ namespace Backend.Controllers
 
         //Create a new product
         [HttpPost]
-        public async Task<ActionResult<Product>> CreateProduct(Product product)
+        public async Task<ActionResult<Product>> CreateProduct([FromForm] ProductCreateRequest productCreateRequest)
         {
             try
             {
-                if (product == null)
+                if (productCreateRequest == null)
                 {
                     return BadRequest();
                 }
 
-                var createProduct = await _productRepository.AddProduct(product);
+                var createProduct = await _productRepository.AddProduct(productCreateRequest);
                 return CreatedAtAction(nameof(GetProduct), new { id = createProduct.ProductId },
                     createProduct);
             }
@@ -101,27 +103,21 @@ namespace Backend.Controllers
 
         //Update 1 product
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Product>> UpdateProduct(int id, Product product)
+        public async Task<ActionResult<Product>> UpdateProduct(int id, [FromForm] ProductCreateRequest productCreateRequest)
         {
             try
             {
-                if (id != product.ProductId)
+                if (productCreateRequest == null)
                 {
-                    return BadRequest("Product ID mismatch");
+                    return BadRequest();
                 }
-                var productToUpdate = await _productRepository.GetProduct(id);
-
-                if (productToUpdate == null)
-                {
-                    return NotFound($"Product with Id = {id} not found");
-                }
-
-                return await _productRepository.UpdateProduct(product);
+                var updateBrand = await _productRepository.UpdateProduct(id, productCreateRequest);
+                return updateBrand;
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                                  "Error updating data");
+                                "Error retrieving data from the database");
             }
         }
 
@@ -147,6 +143,21 @@ namespace Backend.Controllers
             try
             {
                 return Ok(await _productRepository.GetProductsByCategory(id));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
+
+        //Get a list of products with pages, search, sort
+        [HttpGet]
+        public async Task<ActionResult> GetProductsPages([FromQuery] ProductCriteriaDto productCriteriaDto)
+        {
+            try
+            {
+                return Ok(await _productRepository.GetProductsPages(productCriteriaDto));
             }
             catch (Exception)
             {
