@@ -121,6 +121,8 @@ namespace Backend.Repositories
         {
             var productQuery = _shoesStoreDatabaseContext
                                .Products
+                               .Include(s=>s.Brand)
+                               .Include(s=>s.Category)
                                .AsQueryable();
             productQuery = ProductFilter(productQuery, productCriteriaDto);
 

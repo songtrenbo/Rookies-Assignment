@@ -22,11 +22,11 @@ const SelectField = (props) => {
                 </label>
 
                 <div className="col">
-                    <select className="custom-select" onChange={handleChange}>
+                    <select className="custom-select  form-control" onChange={handleChange}>
                         <option selected hidden>Open this select menu</option>
                         {
-                            options.map(({ id, label: optionLabel, value: optionValue }) => (
-                                <option key={id} value={optionValue} selected = {optionValue === value}>
+                            options.map(({ label: optionLabel, value: optionValue }) => (
+                                <option value={optionValue} selected = {optionValue === value}>
                                     {optionLabel}
                                 </option>
                             ))

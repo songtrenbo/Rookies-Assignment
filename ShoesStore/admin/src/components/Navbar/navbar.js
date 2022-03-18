@@ -33,11 +33,10 @@ const navbar = () => {
           >
             <div className="flex-fill">
               <ul className="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Products{" "}
-                  </a>
-                </li>
+                
+              <Link to="/product" className="nav-link">
+                  <li className="nav-item">Product</li>
+                </Link>
                 <Link to="/category" className="nav-link">
                   <li className="nav-item">Categories</li>
                 </Link>

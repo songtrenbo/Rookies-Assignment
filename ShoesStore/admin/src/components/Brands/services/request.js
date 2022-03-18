@@ -20,6 +20,9 @@ export function getBrandsRequest(query) {
         paramsSerializer: params => qs.stringify(params),
     });
 }
+export function getAllBrandsRequest() {
+    return RequestService.axios.get(EndPoints.brands);
+}
 
 export function UpdateBrandRequest(brandForm) {
     const formData = new FormData();
