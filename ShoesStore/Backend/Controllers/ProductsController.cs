@@ -28,7 +28,12 @@ namespace Backend.Controllers
         {
             try
             {
-                return Ok(await _productRepository.GetProducts());
+                var result = await _productRepository.GetProducts();
+                if (result.Count() == 0)
+                {
+                    return NoContent();
+                }
+                return Ok(result);
             }
             catch (Exception)
             {

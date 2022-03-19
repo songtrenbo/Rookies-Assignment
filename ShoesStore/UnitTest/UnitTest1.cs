@@ -1,3 +1,4 @@
+using Moq;
 using System;
 using Xunit;
 
@@ -8,7 +9,6 @@ namespace UnitTest
         [Fact]
         public void Test1()
         {
-
         }
     }
 }
