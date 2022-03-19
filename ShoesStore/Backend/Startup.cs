@@ -48,6 +48,7 @@ namespace Backend
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISizeRepository, SizeRepository>();
             services.AddScoped<IRateRepository, RateRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(c => c.AddProfile<AutoMapperProfile>(), typeof(Startup));
 
             services.AddCors(options =>
