@@ -10,6 +10,9 @@ const Endpoints = {
 
     product: '/api/Products',
     productId: (id)=> `api/Products/${id}`,
+
+    user: '/api/Users',
+    userId: (id)=> `api/Users/${id}`,
 };
 
 export default Endpoints;

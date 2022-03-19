@@ -2,11 +2,12 @@ import React,{ lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/navbar";
 import InLineLoader from "./shared-components/InlineLoader";
-import { BRAND, CATEGORY, PRODUCT } from "./Constants/pages";
+import { BRAND, CATEGORY, PRODUCT, USER } from "./Constants/pages";
 // import Category from "./components/Categories";
 const Brand = lazy(() => import('./components/Brands'));
 const Category = lazy(() => import('./components/Categories'));
 const Product = lazy(() => import('./components/Products'));
+const User = lazy(() => import('./components/Users'));
 const SusspenseLoading = ({ children }) => (
   <Suspense fallback={<InLineLoader />}>
     {children}
@@ -15,20 +16,6 @@ const SusspenseLoading = ({ children }) => (
 
 function App() {
   return (
-    // <div>
-    //   <Router>
-    //   <div className="App">
-    //     <Navbar />
-    //   <SusspenseLoading>
-    //     <Switch>
-    //       <Route path={BRAND}>
-    //         <Brand />
-    //       </Route>
-    //     </Switch>
-    //   </SusspenseLoading>
-    //   </div>
-    //   </Router>
-    // </div>
      <Router>
      <div className="App">
       <Navbar />
@@ -43,6 +30,9 @@ function App() {
            </Route>
            <Route path={PRODUCT}>
              <Product />
+           </Route>
+           <Route path={USER}>
+             <User />
            </Route>
            <Route path={BRAND}>
              <Brand />
