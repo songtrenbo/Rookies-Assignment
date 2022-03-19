@@ -26,9 +26,9 @@ namespace Backend.Repositories
         {
             return await _shoesStoreDatabaseContext.Categories.ToListAsync();
         }
-        public async Task<Category> GetCategory(int categorId)
+        public async Task<Category> GetCategory(int categoryId)
         {
-            return await _shoesStoreDatabaseContext.Categories.FirstOrDefaultAsync(e => e.CategoryId == categorId);
+            return await _shoesStoreDatabaseContext.Categories.FirstOrDefaultAsync(e => e.CategoryId == categoryId);
         }
 
         public async Task<Category> AddCategory([FromForm] CategoryCreateRequest categoryCreateRequest)

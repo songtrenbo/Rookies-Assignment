@@ -27,7 +27,12 @@ namespace Backend.Controllers
         {
             try
             {
-                return Ok(await _categoryRepository.GetCategoies());
+                var result = await _categoryRepository.GetCategoies();
+                if (result.Count() == 0)
+                {
+                    return NoContent();
+                }
+                return Ok(result);
             }
             catch (Exception)
             {
