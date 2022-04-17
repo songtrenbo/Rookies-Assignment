@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Backend.Extensions;
+using Backend.Model;
 using Backend.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shared.Dto;
@@ -15,20 +17,24 @@ namespace Backend.Repositories
     public class UserRepository: IUserRepository
     {
         private readonly ShoesStoreDatabaseContext _shoesStoreDatabaseContext;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
 
-        public UserRepository(ShoesStoreDatabaseContext shoesStoreDatabaseContext, IMapper mapper)
+        public UserRepository(ShoesStoreDatabaseContext shoesStoreDatabaseContext, UserManager<ApplicationUser> userManager, IMapper mapper)
         {
             _shoesStoreDatabaseContext = shoesStoreDatabaseContext;
+            _userManager = userManager;
             _mapper = mapper;
         }
 
         //Get users with pages, search, sort
         public async Task<PagedResponseDto<UserDto>> GetUsers([FromQuery] UserCriteriaDto userCriteriaDto)
         {
+            //var admin = await _userManager.FindByIdAsync(accountId);
+            var admin = await _userManager.GetUsersInRoleAsync("Admin");
             var userQuery = _shoesStoreDatabaseContext
                                .Users
-                               .Where(s=>s.PermissionId!=1)
+                               .Where(s => s != admin)
                                .AsQueryable();
             userQuery = UserFilter(userQuery, userCriteriaDto);
 
@@ -51,8 +57,8 @@ namespace Backend.Repositories
         }
 
         //Fliter users
-        private IQueryable<User> UserFilter(
-           IQueryable<User> userQuery,
+        private IQueryable<ApplicationUser> UserFilter(
+           IQueryable<ApplicationUser> userQuery,
            UserCriteriaDto userCriteriaDto)
         {
             if (!String.IsNullOrEmpty(userCriteriaDto.Search))

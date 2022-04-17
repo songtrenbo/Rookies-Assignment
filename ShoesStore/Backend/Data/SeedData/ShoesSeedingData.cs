@@ -1,4 +1,6 @@
-﻿using Backend.Models;
+﻿using Backend.Model;
+using Backend.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,21 +24,28 @@ namespace Backend.Data.SeedData
                 new Brand { BrandId = 7, BrandName = "ECCO" }
            );
 
-            //Data of Permission
-            modelBuilder.Entity<Permission>().HasData(
-                new Permission { PermissionId = 1, PermissionName = "Admin" },
-                new Permission { PermissionId = 2, PermissionName = "Customer" }
-                );
-
+            modelBuilder.Entity<IdentityRole>().HasData(
+               new IdentityRole() { Id = "9CACE705-D838-42A1-830D-6DC9366BAFD9", Name = "Admin", NormalizedName = "admin" },
+               new IdentityRole() { Id = "38241250-25BE-498D-927F-987392EEEAC6", Name = "User", NormalizedName = "staff"}
+               );
+            var hasher = new PasswordHasher<ApplicationUser>();
             //Data of User
-            modelBuilder.Entity<User>().HasData(
-                new User { UserId = 1, UserEmail = "Admin", Password = "Admin", FirstName = "Sam", LastName = "GoodMan", Address = "772 North Dr Villa Ridge, Missouri(MO), 63089", Phone = "7169379740", PermissionId = 1 },
-                new User { UserId = 2, UserEmail = "nico.smith29@gmail.com", Password = "123456", FirstName = "Smith", LastName = "Nico", Address = "124 Damon Rd Needham Heights, Massachusetts(MA), 02494", Phone = "9226852630", PermissionId = 2 },
-                new User { UserId = 3, UserEmail = "megane_conroy@gmail.com", Password = "123456", FirstName = "Megane", LastName = "Conroy", Address = "121 W Main St Pottstown, Pennsylvania(PA), 19465", Phone = "5547714494", PermissionId = 2 },
-                new User { UserId = 4, UserEmail = "wilber73@gmail.com", Password = "123456", FirstName = "Wilber", LastName = "Stafford", Address = "6910 Middle Rd 4 Racine, Wisconsin(WI), 53402", Phone = "3388576230", PermissionId = 2 },
-                new User { UserId = 5, UserEmail = "timothy.zulauf84@gmail.com", Password = "123456", FirstName = "Timothy", LastName = "Zulauf", Address = "123456', N'173 Candlewood Trailer Park Danbury, Connecticut(CT), 06811", Phone = "3643898217", PermissionId = 2 },
-                new User { UserId = 6, UserEmail = "customer1@gmail.com", Password = "123456", FirstName = "Derek", LastName = "Levy", Address = "1025 Meadow Dr Cottage Hills, Illinois(IL), 62018", Phone = "9799644643", PermissionId = 2 }
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser { Id = "74B99129-A554-46FB-9BC3-C28C721DE30F", Email = "Admin", PasswordHash = hasher.HashPassword(null, "admin"), FirstName = "Sam", LastName = "GoodMan", Address = "772 North Dr Villa Ridge, Missouri(MO), 63089", PhoneNumber = "7169379740" },
+                new ApplicationUser { Id = "68385F93-CB1F-4394-A923-C5BB6D87B2B8", Email = "nico.smith29@gmail.com", PasswordHash = hasher.HashPassword(null, "123456789"), FirstName = "Smith", LastName = "Nico", Address = "124 Damon Rd Needham Heights, Massachusetts(MA), 02494", PhoneNumber = "9226852630"},
+                new ApplicationUser { Id = "19082211-16F2-4191-8D57-0789CF309208", Email = "megane_conroy@gmail.com", PasswordHash = hasher.HashPassword(null, "123456789"), FirstName = "Megane", LastName = "Conroy", Address = "121 W Main St Pottstown, Pennsylvania(PA), 19465", PhoneNumber = "5547714494"},
+                new ApplicationUser { Id = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE", Email = "wilber73@gmail.com", PasswordHash = hasher.HashPassword(null, "123456789"), FirstName = "Wilber", LastName = "Stafford", Address = "6910 Middle Rd 4 Racine, Wisconsin(WI), 53402", PhoneNumber = "3388576230"},
+                new ApplicationUser { Id = "9CACE705-D838-42A1-830D-6DC9366BAFD9", Email = "timothy.zulauf84@gmail.com", PasswordHash = hasher.HashPassword(null, "123456789"), FirstName = "Timothy", LastName = "Zulauf", Address = "123456', N'173 Candlewood Trailer Park Danbury, Connecticut(CT), 06811", PhoneNumber = "3643898217" },
+                new ApplicationUser { Id = "38241250-25BE-498D-927F-987392EEEAC6", Email = "customer1@gmail.com", PasswordHash = hasher.HashPassword(null, "123456789"), FirstName = "Derek", LastName = "Levy", Address = "1025 Meadow Dr Cottage Hills, Illinois(IL), 62018", PhoneNumber = "9799644643"}
                 );
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+               new IdentityUserRole<string> { RoleId = "9CACE705-D838-42A1-830D-6DC9366BAFD9", UserId = "74B99129-A554-46FB-9BC3-C28C721DE30F" },
+               new IdentityUserRole<string> { RoleId = "38241250-25BE-498D-927F-987392EEEAC6", UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8" },
+               new IdentityUserRole<string> { RoleId = "38241250-25BE-498D-927F-987392EEEAC6", UserId = "19082211-16F2-4191-8D57-0789CF309208" },
+               new IdentityUserRole<string> { RoleId = "38241250-25BE-498D-927F-987392EEEAC6", UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE" },
+               new IdentityUserRole<string> { RoleId = "38241250-25BE-498D-927F-987392EEEAC6", UserId = "9CACE705-D838-42A1-830D-6DC9366BAFD9" },
+               new IdentityUserRole<string> { RoleId = "38241250-25BE-498D-927F-987392EEEAC6", UserId = "38241250-25BE-498D-927F-987392EEEAC6" }
+               );
 
             //Data of Category
             modelBuilder.Entity<Category>().HasData(
@@ -355,16 +364,16 @@ namespace Backend.Data.SeedData
 
             //Data of order
             modelBuilder.Entity<Order>().HasData(
-                new Order { OrderId = 1, UserId = 2, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 335 },
-                new Order { OrderId = 2, UserId = 2, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 167.5 },
-                new Order { OrderId = 3, UserId = 2, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 167.5 },
-                new Order { OrderId = 4, UserId = 3, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 167.5 },
-                new Order { OrderId = 5, UserId = 3, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 325 },
-                new Order { OrderId = 6, UserId = 3, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-03-15 05:35:51"), OrderTotal = 74.95 },
-                new Order { OrderId = 7, UserId = 3, Status = 1, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 74.95 },
-                new Order { OrderId = 8, UserId = 4, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 224.85 },
-                new Order { OrderId = 9, UserId = 4, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 150.98 },
-                new Order { OrderId = 10, UserId = 4, Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 150.98 }
+                new Order { OrderId = 1, UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8", Status = 3, OrderDate = DateTime.Parse("2022 -02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 335 },
+                new Order { OrderId = 2, UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8", Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 167.5 },
+                new Order { OrderId = 3, UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8", Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 167.5 },
+                new Order { OrderId = 4, UserId = "19082211-16F2-4191-8D57-0789CF309208", Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 167.5 },
+                new Order { OrderId = 5, UserId = "19082211-16F2-4191-8D57-0789CF309208", Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 325 },
+                new Order { OrderId = 6, UserId = "19082211-16F2-4191-8D57-0789CF309208", Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-03-15 05:35:51"), OrderTotal = 74.95 },
+                new Order { OrderId = 7, UserId = "19082211-16F2-4191-8D57-0789CF309208", Status = 1, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 74.95 },
+                new Order { OrderId = 8, UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE", Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 224.85 },
+                new Order { OrderId = 9, UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE", Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 150.98 },
+                new Order { OrderId = 10, UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE", Status = 3, OrderDate = DateTime.Parse("2022-02-15 05:35:51"), ShippingDate = DateTime.Parse("2022-02-18 05:35:51"), OrderTotal = 150.98 }
                 );
             //Data of order detail
             modelBuilder.Entity<OrderDetail>().HasData(
@@ -380,19 +389,19 @@ namespace Backend.Data.SeedData
                 new OrderDetail { OrderDetailsId = 10, OrderId = 10, ProductId = 3, ProductQty = 2, ProductPrice = 75.49, Subtotal = 150.98 }
                 );
 
-           //Data of rating
-           modelBuilder.Entity<Rate>().HasData(
-                new Rate { RateId = 1, ProductId = 1, OrderId = 1, UserId = 2, Points = 5, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Nice shoes, i love it" },
-                new Rate { RateId = 2, ProductId = 1, OrderId = 2, UserId = 2, Points = 4, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "I'm really like this shoes" },
-                new Rate { RateId = 3, ProductId = 1, OrderId = 3, UserId = 2, Points = 4, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Wow, what a nice shoes!!!" },
-                new Rate { RateId = 4, ProductId = 1, OrderId = 4, UserId = 3, Points = 3, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Good shoes but i don't really like this shoes style" },
-                new Rate { RateId = 5, ProductId = 1, OrderId = 5, UserId = 3, Points = 5, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Amazing, Good shoes, good style" },
-                new Rate { RateId = 6, ProductId = 2, OrderId = 6, UserId = 3, Points = 1, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Is this a joke? I bought this shoes and it took about 1 month to get to me, Why? And why it got dirty everywhere on my shoes?" },
-                new Rate { RateId = 7, ProductId = 2, OrderId = 7, UserId = 3, Points = 1, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "What is this? How can i wear this shoes? It look so difference than the picture on the shop!" },
-                new Rate { RateId = 8, ProductId = 2, OrderId = 8, UserId = 4, Points = 3, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "I think this shoes is ok with me" },
-                new Rate { RateId = 9, ProductId = 3, OrderId = 9, UserId = 4, Points = 4, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Ohhhh this shoes is lovely. You guys should buy this one!" },
-                new Rate { RateId = 10, ProductId = 3, OrderId = 10, UserId = 4, Points = 2, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "It good but i don't like it!!!" }
-                );
+            //Data of rating
+            modelBuilder.Entity<Rate>().HasData(
+                 new Rate { RateId = 1, ProductId = 1, OrderId = 1, UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8", Points = 5, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Nice shoes, i love it" },
+                 new Rate { RateId = 2, ProductId = 1, OrderId = 2, UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8", Points = 4, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "I'm really like this shoes" },
+                 new Rate { RateId = 3, ProductId = 1, OrderId = 3, UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8", Points = 4, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Wow, what a nice shoes!!!" },
+                 new Rate { RateId = 4, ProductId = 1, OrderId = 4, UserId = "19082211-16F2-4191-8D57-0789CF309208", Points = 3, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Good shoes but i don't really like this shoes style" },
+                 new Rate { RateId = 5, ProductId = 1, OrderId = 5, UserId = "19082211-16F2-4191-8D57-0789CF309208", Points = 5, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Amazing, Good shoes, good style" },
+                 new Rate { RateId = 6, ProductId = 2, OrderId = 6, UserId = "19082211-16F2-4191-8D57-0789CF309208", Points = 1, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Is this a joke? I bought this shoes and it took about 1 month to get to me, Why? And why it got dirty everywhere on my shoes?" },
+                 new Rate { RateId = 7, ProductId = 2, OrderId = 7, UserId = "19082211-16F2-4191-8D57-0789CF309208", Points = 1, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "What is this? How can i wear this shoes? It look so difference than the picture on the shop!" },
+                 new Rate { RateId = 8, ProductId = 2, OrderId = 8, UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE", Points = 3, CreateDate = DateTime.Parse("2022 -02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "I think this shoes is ok with me" },
+                 new Rate { RateId = 9, ProductId = 3, OrderId = 9, UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE", Points = 4, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "Ohhhh this shoes is lovely. You guys should buy this one!" },
+                 new Rate { RateId = 10, ProductId = 3, OrderId = 10, UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE", Points = 2, CreateDate = DateTime.Parse("2022-02-18 05:35:51"), UpdateDate = DateTime.Parse("2022-02-18 05:35:51"), IsDeleted = false, Content = "It good but i don't like it!!!" }
+                 );
         }
     }
 }

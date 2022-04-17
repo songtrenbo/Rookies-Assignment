@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Backend.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,7 +14,7 @@ namespace Backend.Models
         [Key, Column(Order = 0)]
         public int RateId { get; set; }
         public int ProductId { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int OrderId { get; set; }
         public int Points { get; set; }
 
@@ -26,6 +27,6 @@ namespace Backend.Models
 
         public Order Order { get; set; }
         public Product Product { get; set; }
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

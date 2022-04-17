@@ -16,8 +16,186 @@ namespace Backend.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.14")
+                .HasAnnotation("ProductVersion", "5.0.16")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Backend.Model.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "74B99129-A554-46FB-9BC3-C28C721DE30F",
+                            AccessFailedCount = 0,
+                            Address = "772 North Dr Villa Ridge, Missouri(MO), 63089",
+                            ConcurrencyStamp = "9d7a0274-47ff-41d3-9f60-91d762c73ffd",
+                            Email = "Admin",
+                            EmailConfirmed = false,
+                            FirstName = "Sam",
+                            LastName = "GoodMan",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAENMYE/lCLTHm4GJUF0EnnkWCInBQJlWVe/VnJ+f0q5oe7DUsq1QdsyENWmIb7NJuBg==",
+                            PhoneNumber = "7169379740",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "58493094-1491-47e3-8334-9cac4eabbc18",
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = "68385F93-CB1F-4394-A923-C5BB6D87B2B8",
+                            AccessFailedCount = 0,
+                            Address = "124 Damon Rd Needham Heights, Massachusetts(MA), 02494",
+                            ConcurrencyStamp = "b65c6c7b-e7e0-4f4d-940b-cec9e49a9585",
+                            Email = "nico.smith29@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Smith",
+                            LastName = "Nico",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ8L6l4PIj8nE8Qgy0T2x/zQmIttPqKA5hT6AZGzOdz6hme7jSCLhnCVFX7l2C4AFw==",
+                            PhoneNumber = "9226852630",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "3dc4eca2-685e-4058-8fd5-f9868d2cff5b",
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = "19082211-16F2-4191-8D57-0789CF309208",
+                            AccessFailedCount = 0,
+                            Address = "121 W Main St Pottstown, Pennsylvania(PA), 19465",
+                            ConcurrencyStamp = "a380fcda-aa07-4685-8e97-23a8b779951a",
+                            Email = "megane_conroy@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Megane",
+                            LastName = "Conroy",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEBfbHh8sZVZSBTG4XWoHsT5hwiq7cZFkSTqXMEEzxcFROFUrk/TSRtmeelxhjzakXA==",
+                            PhoneNumber = "5547714494",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "b0b3533b-9dd8-4bca-a17c-5f4fae02d112",
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE",
+                            AccessFailedCount = 0,
+                            Address = "6910 Middle Rd 4 Racine, Wisconsin(WI), 53402",
+                            ConcurrencyStamp = "dc0052ce-83d2-410c-a15a-60611bf8be84",
+                            Email = "wilber73@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Wilber",
+                            LastName = "Stafford",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEKVV22NWXRIlKncW4cXJTijuTTxkk0ajGoQ7ELgthGolfDrpxwky4EgD3k/8HA6+kg==",
+                            PhoneNumber = "3388576230",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "56c7d754-2606-45c5-9a56-8db9d2f79e40",
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = "9CACE705-D838-42A1-830D-6DC9366BAFD9",
+                            AccessFailedCount = 0,
+                            Address = "123456', N'173 Candlewood Trailer Park Danbury, Connecticut(CT), 06811",
+                            ConcurrencyStamp = "89ae8b37-633a-4426-8fe3-85b2966acc27",
+                            Email = "timothy.zulauf84@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Timothy",
+                            LastName = "Zulauf",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEDHhVlG5w6ax6NscKhLGH5dtuoMn5GJE4GwkydOzL6TAkbYJeRwGpWCUcVnOvEEuhA==",
+                            PhoneNumber = "3643898217",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e5bbad86-f63e-4819-9bd9-34414f4df2cd",
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = "38241250-25BE-498D-927F-987392EEEAC6",
+                            AccessFailedCount = 0,
+                            Address = "1025 Meadow Dr Cottage Hills, Illinois(IL), 62018",
+                            ConcurrencyStamp = "7e8a508a-b3b3-49b2-b357-a764e762532f",
+                            Email = "customer1@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Derek",
+                            LastName = "Levy",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEF3SpquHCKwMh9xMYQw1Dzds22SfaCz3Z2Aa2L2Ggzspln4HTdHwLJIHijjs6J+l4Q==",
+                            PhoneNumber = "9799644643",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2ea61f33-9e6d-4e92-876a-4542185aa4ba",
+                            TwoFactorEnabled = false
+                        });
+                });
 
             modelBuilder.Entity("Backend.Models.Brand", b =>
                 {
@@ -1075,8 +1253,8 @@ namespace Backend.Migrations
                     b.Property<int?>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("OrderId");
 
@@ -1092,7 +1270,7 @@ namespace Backend.Migrations
                             OrderTotal = 335.0,
                             ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
                             Status = 3,
-                            UserId = 2
+                            UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8"
                         },
                         new
                         {
@@ -1101,7 +1279,7 @@ namespace Backend.Migrations
                             OrderTotal = 167.5,
                             ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
                             Status = 3,
-                            UserId = 2
+                            UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8"
                         },
                         new
                         {
@@ -1110,7 +1288,7 @@ namespace Backend.Migrations
                             OrderTotal = 167.5,
                             ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
                             Status = 3,
-                            UserId = 2
+                            UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8"
                         },
                         new
                         {
@@ -1119,7 +1297,7 @@ namespace Backend.Migrations
                             OrderTotal = 167.5,
                             ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
                             Status = 3,
-                            UserId = 3
+                            UserId = "19082211-16F2-4191-8D57-0789CF309208"
                         },
                         new
                         {
@@ -1128,7 +1306,7 @@ namespace Backend.Migrations
                             OrderTotal = 325.0,
                             ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
                             Status = 3,
-                            UserId = 3
+                            UserId = "19082211-16F2-4191-8D57-0789CF309208"
                         },
                         new
                         {
@@ -1137,7 +1315,7 @@ namespace Backend.Migrations
                             OrderTotal = 74.950000000000003,
                             ShippingDate = new DateTime(2022, 3, 15, 5, 35, 51, 0, DateTimeKind.Unspecified),
                             Status = 3,
-                            UserId = 3
+                            UserId = "19082211-16F2-4191-8D57-0789CF309208"
                         },
                         new
                         {
@@ -1146,7 +1324,7 @@ namespace Backend.Migrations
                             OrderTotal = 74.950000000000003,
                             ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
                             Status = 1,
-                            UserId = 3
+                            UserId = "19082211-16F2-4191-8D57-0789CF309208"
                         },
                         new
                         {
@@ -1155,7 +1333,7 @@ namespace Backend.Migrations
                             OrderTotal = 224.84999999999999,
                             ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
                             Status = 3,
-                            UserId = 4
+                            UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE"
                         },
                         new
                         {
@@ -1164,7 +1342,7 @@ namespace Backend.Migrations
                             OrderTotal = 150.97999999999999,
                             ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
                             Status = 3,
-                            UserId = 4
+                            UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE"
                         },
                         new
                         {
@@ -1173,7 +1351,7 @@ namespace Backend.Migrations
                             OrderTotal = 150.97999999999999,
                             ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
                             Status = 3,
-                            UserId = 4
+                            UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE"
                         });
                 });
 
@@ -1297,33 +1475,6 @@ namespace Backend.Migrations
                             ProductPrice = 75.489999999999995,
                             ProductQty = 2,
                             Subtotal = 150.97999999999999
-                        });
-                });
-
-            modelBuilder.Entity("Backend.Models.Permission", b =>
-                {
-                    b.Property<int>("PermissionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("PermissionName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PermissionId");
-
-                    b.ToTable("Permissions");
-
-                    b.HasData(
-                        new
-                        {
-                            PermissionId = 1,
-                            PermissionName = "Admin"
-                        },
-                        new
-                        {
-                            PermissionId = 2,
-                            PermissionName = "Customer"
                         });
                 });
 
@@ -1821,8 +1972,8 @@ namespace Backend.Migrations
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("RateId");
 
@@ -1845,7 +1996,7 @@ namespace Backend.Migrations
                             Points = 5,
                             ProductId = 1,
                             UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8"
                         },
                         new
                         {
@@ -1857,7 +2008,7 @@ namespace Backend.Migrations
                             Points = 4,
                             ProductId = 1,
                             UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8"
                         },
                         new
                         {
@@ -1869,7 +2020,7 @@ namespace Backend.Migrations
                             Points = 4,
                             ProductId = 1,
                             UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8"
                         },
                         new
                         {
@@ -1881,7 +2032,7 @@ namespace Backend.Migrations
                             Points = 3,
                             ProductId = 1,
                             UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
-                            UserId = 3
+                            UserId = "19082211-16F2-4191-8D57-0789CF309208"
                         },
                         new
                         {
@@ -1893,7 +2044,7 @@ namespace Backend.Migrations
                             Points = 5,
                             ProductId = 1,
                             UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
-                            UserId = 3
+                            UserId = "19082211-16F2-4191-8D57-0789CF309208"
                         },
                         new
                         {
@@ -1905,7 +2056,7 @@ namespace Backend.Migrations
                             Points = 1,
                             ProductId = 2,
                             UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
-                            UserId = 3
+                            UserId = "19082211-16F2-4191-8D57-0789CF309208"
                         },
                         new
                         {
@@ -1917,7 +2068,7 @@ namespace Backend.Migrations
                             Points = 1,
                             ProductId = 2,
                             UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
-                            UserId = 3
+                            UserId = "19082211-16F2-4191-8D57-0789CF309208"
                         },
                         new
                         {
@@ -1929,7 +2080,7 @@ namespace Backend.Migrations
                             Points = 3,
                             ProductId = 2,
                             UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
-                            UserId = 4
+                            UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE"
                         },
                         new
                         {
@@ -1941,7 +2092,7 @@ namespace Backend.Migrations
                             Points = 4,
                             ProductId = 3,
                             UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
-                            UserId = 4
+                            UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE"
                         },
                         new
                         {
@@ -1953,7 +2104,7 @@ namespace Backend.Migrations
                             Points = 2,
                             ProductId = 3,
                             UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
-                            UserId = 4
+                            UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE"
                         });
                 });
 
@@ -2803,111 +2954,187 @@ namespace Backend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Backend.Models.User", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Address")
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(30)");
+                    b.HasKey("Id");
 
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)");
-
-                    b.HasKey("UserId");
-
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("Users");
+                    b.ToTable("AspNetRoles");
 
                     b.HasData(
                         new
                         {
-                            UserId = 1,
-                            Address = "772 North Dr Villa Ridge, Missouri(MO), 63089",
-                            FirstName = "Sam",
-                            LastName = "GoodMan",
-                            Password = "Admin",
-                            PermissionId = 1,
-                            Phone = "7169379740",
-                            UserEmail = "Admin"
+                            Id = "9CACE705-D838-42A1-830D-6DC9366BAFD9",
+                            ConcurrencyStamp = "18f80431-ffb8-4628-824f-c0579306208b",
+                            Name = "Admin",
+                            NormalizedName = "admin"
                         },
                         new
                         {
-                            UserId = 2,
-                            Address = "124 Damon Rd Needham Heights, Massachusetts(MA), 02494",
-                            FirstName = "Smith",
-                            LastName = "Nico",
-                            Password = "123456",
-                            PermissionId = 2,
-                            Phone = "9226852630",
-                            UserEmail = "nico.smith29@gmail.com"
-                        },
-                        new
-                        {
-                            UserId = 3,
-                            Address = "121 W Main St Pottstown, Pennsylvania(PA), 19465",
-                            FirstName = "Megane",
-                            LastName = "Conroy",
-                            Password = "123456",
-                            PermissionId = 2,
-                            Phone = "5547714494",
-                            UserEmail = "megane_conroy@gmail.com"
-                        },
-                        new
-                        {
-                            UserId = 4,
-                            Address = "6910 Middle Rd 4 Racine, Wisconsin(WI), 53402",
-                            FirstName = "Wilber",
-                            LastName = "Stafford",
-                            Password = "123456",
-                            PermissionId = 2,
-                            Phone = "3388576230",
-                            UserEmail = "wilber73@gmail.com"
-                        },
-                        new
-                        {
-                            UserId = 5,
-                            Address = "123456', N'173 Candlewood Trailer Park Danbury, Connecticut(CT), 06811",
-                            FirstName = "Timothy",
-                            LastName = "Zulauf",
-                            Password = "123456",
-                            PermissionId = 2,
-                            Phone = "3643898217",
-                            UserEmail = "timothy.zulauf84@gmail.com"
-                        },
-                        new
-                        {
-                            UserId = 6,
-                            Address = "1025 Meadow Dr Cottage Hills, Illinois(IL), 62018",
-                            FirstName = "Derek",
-                            LastName = "Levy",
-                            Password = "123456",
-                            PermissionId = 2,
-                            Phone = "9799644643",
-                            UserEmail = "customer1@gmail.com"
+                            Id = "38241250-25BE-498D-927F-987392EEEAC6",
+                            ConcurrencyStamp = "8ec77b94-3a10-4c07-9a1d-e57dc71b3cba",
+                            Name = "User",
+                            NormalizedName = "staff"
                         });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "74B99129-A554-46FB-9BC3-C28C721DE30F",
+                            RoleId = "9CACE705-D838-42A1-830D-6DC9366BAFD9"
+                        },
+                        new
+                        {
+                            UserId = "68385F93-CB1F-4394-A923-C5BB6D87B2B8",
+                            RoleId = "38241250-25BE-498D-927F-987392EEEAC6"
+                        },
+                        new
+                        {
+                            UserId = "19082211-16F2-4191-8D57-0789CF309208",
+                            RoleId = "38241250-25BE-498D-927F-987392EEEAC6"
+                        },
+                        new
+                        {
+                            UserId = "85D28D4C-9A15-4AA1-B592-29CF8EE8CDEE",
+                            RoleId = "38241250-25BE-498D-927F-987392EEEAC6"
+                        },
+                        new
+                        {
+                            UserId = "9CACE705-D838-42A1-830D-6DC9366BAFD9",
+                            RoleId = "38241250-25BE-498D-927F-987392EEEAC6"
+                        },
+                        new
+                        {
+                            UserId = "38241250-25BE-498D-927F-987392EEEAC6",
+                            RoleId = "38241250-25BE-498D-927F-987392EEEAC6"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("Backend.Models.Image", b =>
@@ -2923,7 +3150,7 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.Order", b =>
                 {
-                    b.HasOne("Backend.Models.User", "User")
+                    b.HasOne("Backend.Model.ApplicationUser", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId");
 
@@ -2980,11 +3207,9 @@ namespace Backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Models.User", "User")
+                    b.HasOne("Backend.Model.ApplicationUser", "User")
                         .WithMany("Rates")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Order");
 
@@ -3012,15 +3237,62 @@ namespace Backend.Migrations
                     b.Navigation("Size");
                 });
 
-            modelBuilder.Entity("Backend.Models.User", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Backend.Models.Permission", "Permission")
-                        .WithMany("Users")
-                        .HasForeignKey("PermissionId")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Backend.Model.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Backend.Model.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Permission");
+                    b.HasOne("Backend.Model.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Backend.Model.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Backend.Model.ApplicationUser", b =>
+                {
+                    b.Navigation("Orders");
+
+                    b.Navigation("Rates");
                 });
 
             modelBuilder.Entity("Backend.Models.Brand", b =>
@@ -3040,11 +3312,6 @@ namespace Backend.Migrations
                     b.Navigation("Rates");
                 });
 
-            modelBuilder.Entity("Backend.Models.Permission", b =>
-                {
-                    b.Navigation("Users");
-                });
-
             modelBuilder.Entity("Backend.Models.Product", b =>
                 {
                     b.Navigation("Images");
@@ -3059,13 +3326,6 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Models.Size", b =>
                 {
                     b.Navigation("SizeProducts");
-                });
-
-            modelBuilder.Entity("Backend.Models.User", b =>
-                {
-                    b.Navigation("Orders");
-
-                    b.Navigation("Rates");
                 });
 #pragma warning restore 612, 618
         }
