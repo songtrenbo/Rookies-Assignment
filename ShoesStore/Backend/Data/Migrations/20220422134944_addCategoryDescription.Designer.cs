@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ShoesStoreDatabaseContext))]
-    [Migration("20220309063952_SeedingDataOrderRate")]
-    partial class SeedingDataOrderRate
+    [Migration("20220422134944_addCategoryDescription")]
+    partial class addCategoryDescription
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,6 +85,9 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
@@ -93,27 +96,32 @@ namespace Backend.Migrations
                         new
                         {
                             CategoryId = 1,
-                            CategoryName = "SNEAKER"
+                            CategoryName = "SNEAKER",
+                            Description = "Sneakers are shoes primarily designed for sports or other forms of physical exercise, but which are now also widely used for everyday casual wear."
                         },
                         new
                         {
                             CategoryId = 2,
-                            CategoryName = "SANDALS"
+                            CategoryName = "SANDALS",
+                            Description = "Sandals are an open type of footwear, consisting of a sole held to the wearer's foot by straps going over the instep and around the ankle. Sandals can also have a heel."
                         },
                         new
                         {
                             CategoryId = 3,
-                            CategoryName = "ATHLETIC"
+                            CategoryName = "ATHLETIC",
+                            Description = "Sport pertains to any form of competitive physical activity or game that aims to use, maintain or improve physical ability and skills while providing"
                         },
                         new
                         {
                             CategoryId = 4,
-                            CategoryName = "OUTDOOR"
+                            CategoryName = "OUTDOOR",
+                            Description = "Hiking (walking) boots are footwear specifically designed for protecting the feet and ankles during outdoor walking activities such as hiking."
                         },
                         new
                         {
                             CategoryId = 5,
-                            CategoryName = "WATERPROOF"
+                            CategoryName = "WATERPROOF",
+                            Description = "A water shoe is a type of footwear that is typically used for activities where the feet are likely to become wet, such as kayaking. "
                         });
                 });
 
@@ -2825,7 +2833,7 @@ namespace Backend.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PermissionId")
                         .HasColumnType("int");
@@ -2834,6 +2842,10 @@ namespace Backend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(250)");
 
@@ -2850,10 +2862,11 @@ namespace Backend.Migrations
                             Address = "772 North Dr Villa Ridge, Missouri(MO), 63089",
                             FirstName = "Sam",
                             LastName = "GoodMan",
-                            Password = "Admin",
+                            Password = "AQAAAAEAACcQAAAAEDqdlfhjtsKXmuG6iu24+xb+KShv69j/bdgupu1gniSw/IpU9DHE0DjrSW3gsGffnQ==",
                             PermissionId = 1,
                             Phone = "7169379740",
-                            UserEmail = "Admin"
+                            UserEmail = "Admin",
+                            UserName = "Admin"
                         },
                         new
                         {
@@ -2861,10 +2874,11 @@ namespace Backend.Migrations
                             Address = "124 Damon Rd Needham Heights, Massachusetts(MA), 02494",
                             FirstName = "Smith",
                             LastName = "Nico",
-                            Password = "123456",
+                            Password = "AQAAAAEAACcQAAAAEFwK2sAVbQiskKhdksmwzheeo2qVxkY5Id5DXqlIEj54EUY/y8kpO6ATfdRVXpnqvw==",
                             PermissionId = 2,
                             Phone = "9226852630",
-                            UserEmail = "nico.smith29@gmail.com"
+                            UserEmail = "nico.smith29@gmail.com",
+                            UserName = "user1"
                         },
                         new
                         {
@@ -2872,10 +2886,11 @@ namespace Backend.Migrations
                             Address = "121 W Main St Pottstown, Pennsylvania(PA), 19465",
                             FirstName = "Megane",
                             LastName = "Conroy",
-                            Password = "123456",
+                            Password = "AQAAAAEAACcQAAAAEE3R/BNpHrg0e67+KgHHEfJXwHD9zmTL9fvar/sJrWwbyLiUE02WO4zE0mF+ydWlvA==",
                             PermissionId = 2,
                             Phone = "5547714494",
-                            UserEmail = "megane_conroy@gmail.com"
+                            UserEmail = "megane_conroy@gmail.com",
+                            UserName = "user2"
                         },
                         new
                         {
@@ -2883,10 +2898,11 @@ namespace Backend.Migrations
                             Address = "6910 Middle Rd 4 Racine, Wisconsin(WI), 53402",
                             FirstName = "Wilber",
                             LastName = "Stafford",
-                            Password = "123456",
+                            Password = "AQAAAAEAACcQAAAAEB1sK5yKqHthl2/uEdryTfha/hTaplSXLBe6gyoshjfPg9ong1HIvYyWZxW27hOn8Q==",
                             PermissionId = 2,
                             Phone = "3388576230",
-                            UserEmail = "wilber73@gmail.com"
+                            UserEmail = "wilber73@gmail.com",
+                            UserName = "user3"
                         },
                         new
                         {
@@ -2894,10 +2910,11 @@ namespace Backend.Migrations
                             Address = "123456', N'173 Candlewood Trailer Park Danbury, Connecticut(CT), 06811",
                             FirstName = "Timothy",
                             LastName = "Zulauf",
-                            Password = "123456",
+                            Password = "AQAAAAEAACcQAAAAEKyWdw25U1Pe43AX2XZjKKnQL7zFIrYHZFWiwD35p+Zthyt072auu8Fz4ySxH00wxQ==",
                             PermissionId = 2,
                             Phone = "3643898217",
-                            UserEmail = "timothy.zulauf84@gmail.com"
+                            UserEmail = "timothy.zulauf84@gmail.com",
+                            UserName = "user4"
                         },
                         new
                         {
@@ -2905,10 +2922,11 @@ namespace Backend.Migrations
                             Address = "1025 Meadow Dr Cottage Hills, Illinois(IL), 62018",
                             FirstName = "Derek",
                             LastName = "Levy",
-                            Password = "123456",
+                            Password = "AQAAAAEAACcQAAAAEPCo7YNFFrbQq1ePE1HTkslllJGaJx7YJQqXAdFoaMKJ5rr10sCUZRSLuqTxR256oQ==",
                             PermissionId = 2,
                             Phone = "9799644643",
-                            UserEmail = "customer1@gmail.com"
+                            UserEmail = "customer1@gmail.com",
+                            UserName = "user5"
                         });
                 });
 

@@ -13,7 +13,9 @@ namespace Backend.Models
         [Key, Column(Order = 0)]
         public int UserId { get; set; }
 
-
+        [Required]
+        [Column(TypeName = "nvarchar(250)")]
+        public string UserName { get; set; }
         [Required]
         [Column(TypeName = "nvarchar(250)")]
         public string UserEmail { get; set; }
@@ -27,7 +29,6 @@ namespace Backend.Models
         public string LastName { get; set; }
 
         [Required]
-        [Column(TypeName = "nvarchar(30)")]
         public string Password { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }

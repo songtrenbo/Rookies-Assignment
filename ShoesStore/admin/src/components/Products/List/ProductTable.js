@@ -11,14 +11,22 @@ import ConfirmModal from "../../../shared-components/ConfirmModal";
 import { DisableProductRequest } from "../services/request";
 
 const columns = [
-  { columnName: "productId", columnValue: "ProductId" },
-  { columnName: "productName", columnValue: "ProductName" },
-  { columnName: "productDesc", columnValue: "ProductDesc" },
+  { columnName: "Id", columnValue: "Id" },
+  { columnName: "Name", columnValue: "ProductName" },
+  { columnName: "Description", columnValue: "ProductDesc" },
   { columnName: "price", columnValue: "Price" },
-  { columnName: "categoryName", columnValue: "CategoryName" },
-  { columnName: "brandName", columnValue: "BrandName" },
+  { columnName: "Category", columnValue: "CategoryName" },
+  { columnName: "Brand", columnValue: "BrandName" },
   { columnName: "stock", columnValue: "Stock" },
+  { columnName: "createDate", columnValue: "CreateDate" },
+  { columnName: "updateDate", columnValue: "UpdateDate" },
 ];
+
+const getFormatDateTime = (date) => {
+  return date;
+  // const DATE_OPTIONS = { day: "numeric", month: "numeric", year: "numeric" };
+  // return new Date(date).toLocaleDateString("vi-VN", DATE_OPTIONS);
+};
 
 const ProductTable = ({
   products,
@@ -38,7 +46,9 @@ const ProductTable = ({
   });
 
   const handleShowInfo = (productId) => {
-    const product = products?.items.find((item) => item.productId === productId);
+    const product = products?.items.find(
+      (item) => item.productId === productId
+    );
 
     if (product) {
       setProductDetail(product);
@@ -98,7 +108,9 @@ const ProductTable = ({
 
   const history = useHistory();
   const handleEdit = (productId) => {
-    const existProduct = products?.items.find((item) => item.productId === Number(productId));
+    const existProduct = products?.items.find(
+      (item) => item.productId === Number(productId)
+    );
     history.push(EDIT_PRODUCT_ID(productId), {
       existProduct: existProduct,
     });
@@ -124,18 +136,34 @@ const ProductTable = ({
               onClick={() => handleShowInfo(data.productId)}
             >
               <td>{data.productId}</td>
-              <td>{data.productName.length>20?data.productName.substring(0,19) + "...":(data.productName)}</td>              
-              <td>{data.productDesc.length>20?data.productDesc.substring(0,19) + "...":(data.productDesc)}</td>
+              <td>
+                {data.productName.length > 20
+                  ? data.productName.substring(0, 19) + "..."
+                  : data.productName}
+              </td>
+              <td>
+                {data.productDesc.length > 20
+                  ? data.productDesc.substring(0, 19) + "..."
+                  : data.productDesc}
+              </td>
               <td>$ {data.price}</td>
               <td>{data.categoryName}</td>
               <td>{data.brandName}</td>
               <td>{data.stock}</td>
+              <td>{getFormatDateTime(data.createDate)}</td>
+              <td>{getFormatDateTime(data.updateDate)}</td>
               <td className="">
-                <ButtonIcon className="btn btn-primary" onClick={() => handleEdit(data.productId)}>
-                  <PencilFill className="text-white" />                  
+                <ButtonIcon
+                  className="btn btn-primary"
+                  onClick={() => handleEdit(data.productId)}
+                >
+                  <PencilFill className="text-white" />
                 </ButtonIcon>
                 &#160;
-                <ButtonIcon className="btn btn-danger" onClick={() => handleShowDisable(data.productId)}>
+                <ButtonIcon
+                  className="btn btn-danger"
+                  onClick={() => handleShowDisable(data.productId)}
+                >
                   <XCircle className="text-white" />
                 </ButtonIcon>
               </td>

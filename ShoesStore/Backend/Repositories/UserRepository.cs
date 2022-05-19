@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Backend.Extensions;
-using Backend.Models;
+using Shared.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shared.Dto;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Backend.Models;
 
 namespace Backend.Repositories
 {
@@ -21,6 +23,27 @@ namespace Backend.Repositories
         {
             _shoesStoreDatabaseContext = shoesStoreDatabaseContext;
             _mapper = mapper;
+        }
+
+        public async Task<bool> CheckUser([FromForm] LoginModel model)
+        {
+            var hasher = new PasswordHasher<User>();       
+
+            var user = await _shoesStoreDatabaseContext.Users.FirstOrDefaultAsync(s => s.UserName == model.UserName);
+            if (user == null)
+            {
+                return false;
+            }
+            var result = hasher.VerifyHashedPassword(user, user.Password, model.Password);
+            if (result != PasswordVerificationResult.Success)
+            {
+                return false;
+            }
+            var permission = await _shoesStoreDatabaseContext.Permissions.FirstOrDefaultAsync(s => s.PermissionId == user.PermissionId);
+            model.PermissionName = permission.PermissionName;
+            model.UserId = user.UserId;
+            model.FullName = user.LastName + " " + user.FirstName;
+            return true;
         }
 
         //Get users with pages, search, sort
@@ -62,6 +85,28 @@ namespace Backend.Repositories
             }
 
             return userQuery;
+        }
+
+        public async Task<List<User>> GetUser()
+        {
+            return await _shoesStoreDatabaseContext.Users.ToListAsync();
+        }
+
+        public async Task<User> Register([FromForm] RegisterModel model)
+        {
+            var hasher = new PasswordHasher<User>();
+            User user = new User
+            {
+                UserName = model.UserName,
+                UserEmail = model.UserEmail,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Password = hasher.HashPassword(null, model.Password),
+                PermissionId = 2
+            };
+            var result = await _shoesStoreDatabaseContext.Users.AddAsync(user);
+            await _shoesStoreDatabaseContext.SaveChangesAsync();
+            return result.Entity;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Backend.Models;
 using Backend.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BrandsController : ControllerBase
@@ -23,6 +25,7 @@ namespace Backend.Api.Controllers
         }
 
         //Get a list of brands
+        [AllowAnonymous]
         [HttpGet("List")]
         public async Task<ActionResult> GetBrands()
         {
@@ -38,6 +41,7 @@ namespace Backend.Api.Controllers
         }
 
         //Get 1 brand by ID
+        [AllowAnonymous]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Brand>> GetBrand(int id)
         {
@@ -58,6 +62,7 @@ namespace Backend.Api.Controllers
         }
 
         //Create a new brand
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Brand>> CreateBrand([FromForm] BrandCreateRequest brandCreateRequest)
         {
@@ -80,6 +85,7 @@ namespace Backend.Api.Controllers
         }
 
         //Update 1 brand
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id:int}")]
         public async Task<ActionResult<Brand>> UpdateBrand(int id, [FromForm] BrandCreateRequest brandCreateRequest)
         {
@@ -100,6 +106,7 @@ namespace Backend.Api.Controllers
         }
 
         //Delete 1 brand
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<Brand>> DeleteBrand(int id)
         {
@@ -123,6 +130,7 @@ namespace Backend.Api.Controllers
 
         //Get a list of brands with pages, search, sort
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult> GetBrandsPages([FromQuery] BrandCriteriaDto brandCriteriaDto)
         {
             try

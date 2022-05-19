@@ -12,7 +12,8 @@ const UpdateCategoryContainer = () => {
     if (existCategory) {
       setCategory({
         categoryId: existCategory.categoryId,
-        categoryName: existCategory.categoryName
+        categoryName: existCategory.categoryName,
+        description: existCategory.description
       });
     }
   }, [existCategory]);

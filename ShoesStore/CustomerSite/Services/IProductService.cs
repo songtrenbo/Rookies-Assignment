@@ -12,5 +12,7 @@ namespace CustomerSite.Services
         Task<IEnumerable<Product>> GetTop9NewProduct();
         Task<Product> GetProduct(int productId);
         Task<IEnumerable<Product>> GetProductsByCategory(int categoryId);
+        Task<Order> CreateOrder(Order order,  string token);
+        Task<OrderDetail> CreateOrderDetail(OrderDetail orderDetail, string token);
     }
 }

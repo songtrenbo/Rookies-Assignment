@@ -156,5 +156,35 @@ namespace Backend.Repositories
             }
             return productQuery;
         }
+
+        public async Task<Order> CreateOrder([FromBody] Order model)
+        {
+            Order order = new Order
+            {
+                OrderDate = DateTime.Now,
+                Status = 1,
+                OrderTotal = model.OrderTotal,
+                UserId = model.UserId
+            };
+            var result = await _shoesStoreDatabaseContext.Orders.AddAsync(order);
+            await _shoesStoreDatabaseContext.SaveChangesAsync();
+            return result.Entity;
+        }
+
+        public async Task<OrderDetail> CreateOrderDetail([FromBody] OrderDetail model)
+        {
+            OrderDetail orderdetail = new OrderDetail
+            {
+                ProductPrice = model.ProductPrice,
+                ProductQty = model.ProductQty,
+                Subtotal = model.Subtotal,
+                OrderId = model.OrderId,
+                ProductId = model.ProductId
+            };
+
+            var result = await _shoesStoreDatabaseContext.OrderDetails.AddAsync(orderdetail);
+            await _shoesStoreDatabaseContext.SaveChangesAsync();
+            return result.Entity;
+        }
     }
 }

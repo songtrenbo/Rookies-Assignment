@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ShoesStoreDatabaseContext))]
-    [Migration("20220303160010_SeedingData")]
-    partial class SeedingData
+    [Migration("20220419102626_addDatabase")]
+    partial class addDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1085,6 +1085,98 @@ namespace Backend.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderId = 1,
+                            OrderDate = new DateTime(2022, 2, 15, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            OrderTotal = 335.0,
+                            ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            Status = 3,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            OrderId = 2,
+                            OrderDate = new DateTime(2022, 2, 15, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            OrderTotal = 167.5,
+                            ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            Status = 3,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            OrderId = 3,
+                            OrderDate = new DateTime(2022, 2, 15, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            OrderTotal = 167.5,
+                            ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            Status = 3,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            OrderId = 4,
+                            OrderDate = new DateTime(2022, 2, 15, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            OrderTotal = 167.5,
+                            ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            Status = 3,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            OrderId = 5,
+                            OrderDate = new DateTime(2022, 2, 15, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            OrderTotal = 325.0,
+                            ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            Status = 3,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            OrderId = 6,
+                            OrderDate = new DateTime(2022, 2, 15, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            OrderTotal = 74.950000000000003,
+                            ShippingDate = new DateTime(2022, 3, 15, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            Status = 3,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            OrderId = 7,
+                            OrderDate = new DateTime(2022, 2, 15, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            OrderTotal = 74.950000000000003,
+                            ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            Status = 1,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            OrderId = 8,
+                            OrderDate = new DateTime(2022, 2, 15, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            OrderTotal = 224.84999999999999,
+                            ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            Status = 3,
+                            UserId = 4
+                        },
+                        new
+                        {
+                            OrderId = 9,
+                            OrderDate = new DateTime(2022, 2, 15, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            OrderTotal = 150.97999999999999,
+                            ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            Status = 3,
+                            UserId = 4
+                        },
+                        new
+                        {
+                            OrderId = 10,
+                            OrderDate = new DateTime(2022, 2, 15, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            OrderTotal = 150.97999999999999,
+                            ShippingDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            Status = 3,
+                            UserId = 4
+                        });
                 });
 
             modelBuilder.Entity("Backend.Models.OrderDetail", b =>
@@ -1106,8 +1198,8 @@ namespace Backend.Migrations
                     b.Property<int>("ProductQty")
                         .HasColumnType("int");
 
-                    b.Property<int>("Subtotal")
-                        .HasColumnType("int");
+                    b.Property<double>("Subtotal")
+                        .HasColumnType("float");
 
                     b.HasKey("OrderDetailsId");
 
@@ -1116,6 +1208,98 @@ namespace Backend.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderDetails");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderDetailsId = 1,
+                            OrderId = 1,
+                            ProductId = 1,
+                            ProductPrice = 167.5,
+                            ProductQty = 2,
+                            Subtotal = 335.0
+                        },
+                        new
+                        {
+                            OrderDetailsId = 2,
+                            OrderId = 2,
+                            ProductId = 1,
+                            ProductPrice = 167.5,
+                            ProductQty = 1,
+                            Subtotal = 167.5
+                        },
+                        new
+                        {
+                            OrderDetailsId = 3,
+                            OrderId = 3,
+                            ProductId = 1,
+                            ProductPrice = 167.5,
+                            ProductQty = 1,
+                            Subtotal = 167.5
+                        },
+                        new
+                        {
+                            OrderDetailsId = 4,
+                            OrderId = 4,
+                            ProductId = 1,
+                            ProductPrice = 167.5,
+                            ProductQty = 1,
+                            Subtotal = 167.5
+                        },
+                        new
+                        {
+                            OrderDetailsId = 5,
+                            OrderId = 5,
+                            ProductId = 1,
+                            ProductPrice = 167.5,
+                            ProductQty = 2,
+                            Subtotal = 335.0
+                        },
+                        new
+                        {
+                            OrderDetailsId = 6,
+                            OrderId = 6,
+                            ProductId = 2,
+                            ProductPrice = 74.950000000000003,
+                            ProductQty = 1,
+                            Subtotal = 74.950000000000003
+                        },
+                        new
+                        {
+                            OrderDetailsId = 7,
+                            OrderId = 7,
+                            ProductId = 2,
+                            ProductPrice = 74.950000000000003,
+                            ProductQty = 1,
+                            Subtotal = 74.950000000000003
+                        },
+                        new
+                        {
+                            OrderDetailsId = 8,
+                            OrderId = 8,
+                            ProductId = 2,
+                            ProductPrice = 74.950000000000003,
+                            ProductQty = 3,
+                            Subtotal = 224.84999999999999
+                        },
+                        new
+                        {
+                            OrderDetailsId = 9,
+                            OrderId = 9,
+                            ProductId = 3,
+                            ProductPrice = 75.489999999999995,
+                            ProductQty = 2,
+                            Subtotal = 150.97999999999999
+                        },
+                        new
+                        {
+                            OrderDetailsId = 10,
+                            OrderId = 10,
+                            ProductId = 3,
+                            ProductPrice = 75.489999999999995,
+                            ProductQty = 2,
+                            Subtotal = 150.97999999999999
+                        });
                 });
 
             modelBuilder.Entity("Backend.Models.Permission", b =>
@@ -1651,6 +1835,128 @@ namespace Backend.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Rates");
+
+                    b.HasData(
+                        new
+                        {
+                            RateId = 1,
+                            Content = "Nice shoes, i love it",
+                            CreateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            OrderId = 1,
+                            Points = 5,
+                            ProductId = 1,
+                            UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            UserId = 2
+                        },
+                        new
+                        {
+                            RateId = 2,
+                            Content = "I'm really like this shoes",
+                            CreateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            OrderId = 2,
+                            Points = 4,
+                            ProductId = 1,
+                            UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            UserId = 2
+                        },
+                        new
+                        {
+                            RateId = 3,
+                            Content = "Wow, what a nice shoes!!!",
+                            CreateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            OrderId = 3,
+                            Points = 4,
+                            ProductId = 1,
+                            UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            UserId = 2
+                        },
+                        new
+                        {
+                            RateId = 4,
+                            Content = "Good shoes but i don't really like this shoes style",
+                            CreateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            OrderId = 4,
+                            Points = 3,
+                            ProductId = 1,
+                            UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            UserId = 3
+                        },
+                        new
+                        {
+                            RateId = 5,
+                            Content = "Amazing, Good shoes, good style",
+                            CreateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            OrderId = 5,
+                            Points = 5,
+                            ProductId = 1,
+                            UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            UserId = 3
+                        },
+                        new
+                        {
+                            RateId = 6,
+                            Content = "Is this a joke? I bought this shoes and it took about 1 month to get to me, Why? And why it got dirty everywhere on my shoes?",
+                            CreateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            OrderId = 6,
+                            Points = 1,
+                            ProductId = 2,
+                            UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            UserId = 3
+                        },
+                        new
+                        {
+                            RateId = 7,
+                            Content = "What is this? How can i wear this shoes? It look so difference than the picture on the shop!",
+                            CreateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            OrderId = 7,
+                            Points = 1,
+                            ProductId = 2,
+                            UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            UserId = 3
+                        },
+                        new
+                        {
+                            RateId = 8,
+                            Content = "I think this shoes is ok with me",
+                            CreateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            OrderId = 8,
+                            Points = 3,
+                            ProductId = 2,
+                            UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            UserId = 4
+                        },
+                        new
+                        {
+                            RateId = 9,
+                            Content = "Ohhhh this shoes is lovely. You guys should buy this one!",
+                            CreateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            OrderId = 9,
+                            Points = 4,
+                            ProductId = 3,
+                            UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            UserId = 4
+                        },
+                        new
+                        {
+                            RateId = 10,
+                            Content = "It good but i don't like it!!!",
+                            CreateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            OrderId = 10,
+                            Points = 2,
+                            ProductId = 3,
+                            UpdateDate = new DateTime(2022, 2, 18, 5, 35, 51, 0, DateTimeKind.Unspecified),
+                            UserId = 4
+                        });
                 });
 
             modelBuilder.Entity("Backend.Models.Size", b =>
@@ -2519,7 +2825,7 @@ namespace Backend.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PermissionId")
                         .HasColumnType("int");
@@ -2528,6 +2834,10 @@ namespace Backend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(250)");
 
@@ -2544,10 +2854,11 @@ namespace Backend.Migrations
                             Address = "772 North Dr Villa Ridge, Missouri(MO), 63089",
                             FirstName = "Sam",
                             LastName = "GoodMan",
-                            Password = "Admin",
+                            Password = "AQAAAAEAACcQAAAAEKABWC+tWrGThzLZD8hIFZF5Ou1/2c97DWP6ZxUe567a1qgSS2CnzANK+sbT9gABAQ==",
                             PermissionId = 1,
                             Phone = "7169379740",
-                            UserEmail = "Admin"
+                            UserEmail = "Admin",
+                            UserName = "Admin"
                         },
                         new
                         {
@@ -2555,10 +2866,11 @@ namespace Backend.Migrations
                             Address = "124 Damon Rd Needham Heights, Massachusetts(MA), 02494",
                             FirstName = "Smith",
                             LastName = "Nico",
-                            Password = "123456",
+                            Password = "AQAAAAEAACcQAAAAEFBN8zcn/LV+jWWL1b13zS4VeMGjBqznXoGrW8tD7SZs8GimlZ5aNDjXEUZiZLFEyg==",
                             PermissionId = 2,
                             Phone = "9226852630",
-                            UserEmail = "nico.smith29@gmail.com"
+                            UserEmail = "nico.smith29@gmail.com",
+                            UserName = "user1"
                         },
                         new
                         {
@@ -2566,10 +2878,11 @@ namespace Backend.Migrations
                             Address = "121 W Main St Pottstown, Pennsylvania(PA), 19465",
                             FirstName = "Megane",
                             LastName = "Conroy",
-                            Password = "123456",
+                            Password = "AQAAAAEAACcQAAAAEBvEpWIjHiYroZpE8bMlN1xKCt4qaf8eOOB7f3OzrIdajbZG7MaQGjSoJ0/onMmLNQ==",
                             PermissionId = 2,
                             Phone = "5547714494",
-                            UserEmail = "megane_conroy@gmail.com"
+                            UserEmail = "megane_conroy@gmail.com",
+                            UserName = "user2"
                         },
                         new
                         {
@@ -2577,10 +2890,11 @@ namespace Backend.Migrations
                             Address = "6910 Middle Rd 4 Racine, Wisconsin(WI), 53402",
                             FirstName = "Wilber",
                             LastName = "Stafford",
-                            Password = "123456",
+                            Password = "AQAAAAEAACcQAAAAEB33nWnII1V40Sqhb8SmN5RroJhs35jq7ay5b+aSxVR4RfRnTpgruZjIhqesbmY9hw==",
                             PermissionId = 2,
                             Phone = "3388576230",
-                            UserEmail = "wilber73@gmail.com"
+                            UserEmail = "wilber73@gmail.com",
+                            UserName = "user3"
                         },
                         new
                         {
@@ -2588,10 +2902,11 @@ namespace Backend.Migrations
                             Address = "123456', N'173 Candlewood Trailer Park Danbury, Connecticut(CT), 06811",
                             FirstName = "Timothy",
                             LastName = "Zulauf",
-                            Password = "123456",
+                            Password = "AQAAAAEAACcQAAAAECQC6LUoJbA/oPzQ+fZWc/uPt+8LyKE1FXNl30FKFAb1OBrg3qnowxX3VY+g0cw/kQ==",
                             PermissionId = 2,
                             Phone = "3643898217",
-                            UserEmail = "timothy.zulauf84@gmail.com"
+                            UserEmail = "timothy.zulauf84@gmail.com",
+                            UserName = "user4"
                         },
                         new
                         {
@@ -2599,10 +2914,11 @@ namespace Backend.Migrations
                             Address = "1025 Meadow Dr Cottage Hills, Illinois(IL), 62018",
                             FirstName = "Derek",
                             LastName = "Levy",
-                            Password = "123456",
+                            Password = "AQAAAAEAACcQAAAAELFyWK+9ozBFvh+jJnQ1krBsYBspU/uc9Em6arfJ7IlStqMlVOAxXBvOie4TiX24LQ==",
                             PermissionId = 2,
                             Phone = "9799644643",
-                            UserEmail = "customer1@gmail.com"
+                            UserEmail = "customer1@gmail.com",
+                            UserName = "user5"
                         });
                 });
 

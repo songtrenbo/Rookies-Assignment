@@ -20,5 +20,7 @@ namespace Backend.Repositories
         Task<IEnumerable<Product>> GetTop9NewProduct();
         Task<IEnumerable<Product>> GetProductsByCategory(int categoryId);
         Task<PagedResponseDto<ProductDto>> GetProductsPages([FromQuery] ProductCriteriaDto productCriteriaDto);
+        Task<Order> CreateOrder([FromBody] Order order);
+        Task<OrderDetail> CreateOrderDetail([FromBody] OrderDetail orderDetail);
     }
 }

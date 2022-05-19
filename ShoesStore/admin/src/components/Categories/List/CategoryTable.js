@@ -13,6 +13,7 @@ import { DisableCategoryRequest } from "../services/request";
 const columns = [
   { columnName: "categoryId", columnValue: "CategoryId" },
   { columnName: "categoryName", columnValue: "CategoryName" },
+  { columnName: "description", columnValue: "Description" },
 ];
 
 const CategoryTable = ({
@@ -33,7 +34,9 @@ const CategoryTable = ({
   });
 
   const handleShowInfo = (categoryId) => {
-    const category = categories?.items.find((item) => item.categoryId === categoryId);
+    const category = categories?.items.find(
+      (item) => item.categoryId === categoryId
+    );
 
     if (category) {
       setCategoryDetail(category);
@@ -93,7 +96,9 @@ const CategoryTable = ({
 
   const history = useHistory();
   const handleEdit = (categoryId) => {
-    const existCategory = categories?.items.find((item) => item.categoryId === Number(categoryId));
+    const existCategory = categories?.items.find(
+      (item) => item.categoryId === Number(categoryId)
+    );
     history.push(EDIT_CATEGORY_ID(categoryId), {
       existCategory: existCategory,
     });
@@ -118,14 +123,21 @@ const CategoryTable = ({
               className=""
               onClick={() => handleShowInfo(data.categoryId)}
             >
-              <td>{data.categoryId}</td>
+              <td style={{maxWidth: "30px"}}>{data.categoryId}</td>
               <td>{data.categoryName}</td>
+              <td className="text-truncate" style={{maxWidth: "560px"}}>{data.description}</td>
               <td className="">
-                <ButtonIcon className="btn btn-primary" onClick={() => handleEdit(data.categoryId)}>
-                  <PencilFill className="text-white" />                  
+                <ButtonIcon
+                  className="btn btn-primary"
+                  onClick={() => handleEdit(data.categoryId)}
+                >
+                  <PencilFill className="text-white" />
                 </ButtonIcon>
                 &#160;
-                <ButtonIcon className="btn btn-danger" onClick={() => handleShowDisable(data.categoryId)}>
+                <ButtonIcon
+                  className="btn btn-danger"
+                  onClick={() => handleShowDisable(data.categoryId)}
+                >
                   <XCircle className="text-white" />
                 </ButtonIcon>
               </td>

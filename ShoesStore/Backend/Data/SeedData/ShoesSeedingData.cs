@@ -1,4 +1,5 @@
 ﻿using Backend.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,23 +29,24 @@ namespace Backend.Data.SeedData
                 new Permission { PermissionId = 2, PermissionName = "Customer" }
                 );
 
+            var hasher = new PasswordHasher<User>();
             //Data of User
             modelBuilder.Entity<User>().HasData(
-                new User { UserId = 1, UserEmail = "Admin", Password = "Admin", FirstName = "Sam", LastName = "GoodMan", Address = "772 North Dr Villa Ridge, Missouri(MO), 63089", Phone = "7169379740", PermissionId = 1 },
-                new User { UserId = 2, UserEmail = "nico.smith29@gmail.com", Password = "123456", FirstName = "Smith", LastName = "Nico", Address = "124 Damon Rd Needham Heights, Massachusetts(MA), 02494", Phone = "9226852630", PermissionId = 2 },
-                new User { UserId = 3, UserEmail = "megane_conroy@gmail.com", Password = "123456", FirstName = "Megane", LastName = "Conroy", Address = "121 W Main St Pottstown, Pennsylvania(PA), 19465", Phone = "5547714494", PermissionId = 2 },
-                new User { UserId = 4, UserEmail = "wilber73@gmail.com", Password = "123456", FirstName = "Wilber", LastName = "Stafford", Address = "6910 Middle Rd 4 Racine, Wisconsin(WI), 53402", Phone = "3388576230", PermissionId = 2 },
-                new User { UserId = 5, UserEmail = "timothy.zulauf84@gmail.com", Password = "123456", FirstName = "Timothy", LastName = "Zulauf", Address = "123456', N'173 Candlewood Trailer Park Danbury, Connecticut(CT), 06811", Phone = "3643898217", PermissionId = 2 },
-                new User { UserId = 6, UserEmail = "customer1@gmail.com", Password = "123456", FirstName = "Derek", LastName = "Levy", Address = "1025 Meadow Dr Cottage Hills, Illinois(IL), 62018", Phone = "9799644643", PermissionId = 2 }
+                new User { UserId = 1, UserName = "Admin",UserEmail = "Admin", Password = hasher.HashPassword(null, "admin"), FirstName = "Sam", LastName = "GoodMan", Address = "772 North Dr Villa Ridge, Missouri(MO), 63089", Phone = "7169379740", PermissionId = 1 },
+                new User { UserId = 2, UserName = "user1", UserEmail = "nico.smith29@gmail.com", Password = hasher.HashPassword(null, "123456"), FirstName = "Smith", LastName = "Nico", Address = "124 Damon Rd Needham Heights, Massachusetts(MA), 02494", Phone = "9226852630", PermissionId = 2 },
+                new User { UserId = 3, UserName = "user2", UserEmail = "megane_conroy@gmail.com", Password = hasher.HashPassword(null, "123456"), FirstName = "Megane", LastName = "Conroy", Address = "121 W Main St Pottstown, Pennsylvania(PA), 19465", Phone = "5547714494", PermissionId = 2 },
+                new User { UserId = 4, UserName = "user3", UserEmail = "wilber73@gmail.com", Password = hasher.HashPassword(null, "123456"), FirstName = "Wilber", LastName = "Stafford", Address = "6910 Middle Rd 4 Racine, Wisconsin(WI), 53402", Phone = "3388576230", PermissionId = 2 },
+                new User { UserId = 5, UserName = "user4", UserEmail = "timothy.zulauf84@gmail.com", Password = hasher.HashPassword(null, "123456"), FirstName = "Timothy", LastName = "Zulauf", Address = "123456', N'173 Candlewood Trailer Park Danbury, Connecticut(CT), 06811", Phone = "3643898217", PermissionId = 2 },
+                new User { UserId = 6, UserName = "user5", UserEmail = "customer1@gmail.com", Password = hasher.HashPassword(null, "123456"), FirstName = "Derek", LastName = "Levy", Address = "1025 Meadow Dr Cottage Hills, Illinois(IL), 62018", Phone = "9799644643", PermissionId = 2 }
                 );
 
             //Data of Category
             modelBuilder.Entity<Category>().HasData(
-                new Category { CategoryId = 1, CategoryName = "SNEAKER" },
-                new Category { CategoryId = 2, CategoryName = "SANDALS" },
-                new Category { CategoryId = 3, CategoryName = "ATHLETIC" },
-                new Category { CategoryId = 4, CategoryName = "OUTDOOR" },
-                new Category { CategoryId = 5, CategoryName = "WATERPROOF" }
+                new Category { CategoryId = 1, CategoryName = "SNEAKER", Description = "Sneakers are shoes primarily designed for sports or other forms of physical exercise, but which are now also widely used for everyday casual wear." },
+                new Category { CategoryId = 2, CategoryName = "SANDALS", Description = "Sandals are an open type of footwear, consisting of a sole held to the wearer's foot by straps going over the instep and around the ankle. Sandals can also have a heel." },
+                new Category { CategoryId = 3, CategoryName = "ATHLETIC", Description = "Sport pertains to any form of competitive physical activity or game that aims to use, maintain or improve physical ability and skills while providing" },
+                new Category { CategoryId = 4, CategoryName = "OUTDOOR", Description = "Hiking (walking) boots are footwear specifically designed for protecting the feet and ankles during outdoor walking activities such as hiking." },
+                new Category { CategoryId = 5, CategoryName = "WATERPROOF", Description = "A water shoe is a type of footwear that is typically used for activities where the feet are likely to become wet, such as kayaking. " }
                 );
 
             //Data of product

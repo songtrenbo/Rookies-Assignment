@@ -4,6 +4,14 @@ import qs from 'qs';
 import RequestService from '../../../services/requests';
 import EndPoints from '../../../Constants/endpoints';
 
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+var accessToken = cookies.get("AccessToken", { path: '/' });
+let config = {
+    headers: {
+      authorization: "Bearer " + accessToken,
+    },
+  };
 export function createProductRequest(productForm) {
     const formData = new FormData();
 
@@ -11,7 +19,7 @@ export function createProductRequest(productForm) {
         formData.append(key, productForm[key]);
     });
 
-    return RequestService.axios.post(EndPoints.product, formData);
+    return RequestService.axios.post(EndPoints.product, formData, config);
 }
 
 export function getProductsRequest(query) {
@@ -28,9 +36,9 @@ export function UpdateProductRequest(productForm) {
         formData.append(key, productForm[key]);
     });
 
-    return RequestService.axios.put(EndPoints.productId(productForm.productId ?? - 1), formData);
+    return RequestService.axios.put(EndPoints.productId(productForm.productId ?? - 1), formData, config);
 }
 
 export function DisableProductRequest(productId) {
-    return RequestService.axios.delete(EndPoints.productId(productId));
+    return RequestService.axios.delete(EndPoints.productId(productId),config);
 }

@@ -2,6 +2,11 @@
 @{
     ViewData["Title"] = "ProductDetail";
 }
+@section scripts {
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/Scripts/Alert/sweetalert2.all.min.js"></script>
+    <script src="~/js/CartFunction.js"></script>
+}
 
 @if (Model.Stock > 0)
 {
@@ -168,7 +173,11 @@
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
                                     </div>
                                     <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
+                                        @{
+                                            string productname = @Model.ProductName;
+                                            <button onclick='AddToCart(@Model.ProductId, "@productname", @Model.Price, @Model.Stock, "@ViewBag.FirstImage.Path")' class="btn btn-success btn-lg" value="addtocard">Add To Cart</button>
+
+                                        }
                                     </div>
                                 </div>
                             </form>

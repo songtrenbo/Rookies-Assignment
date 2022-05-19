@@ -17,6 +17,7 @@ namespace Backend.Models
         [Column(TypeName = "nvarchar(250)")]
         public string CategoryName { get; set; }
 
+        public string Description { get; set; }
         public ICollection<Product> Products { get; set; }
     }
 }

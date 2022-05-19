@@ -70,7 +70,7 @@ const ListProduct = () => {
     }
 
     fetchDataAsync();
-  }, [query, products]);
+  }, [query]);
 
   return (
     <>

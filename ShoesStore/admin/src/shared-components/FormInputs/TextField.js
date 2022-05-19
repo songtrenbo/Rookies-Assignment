@@ -25,7 +25,7 @@ const TextField = (props) => {
                 <div className="col">
                     <input className={`form-control ${validateClass()}`} {...field} {...props} />
                     {error && touched && (
-                        <div className='invalid'>{error}</div>
+                        <div className='invalid text-danger'>{error}</div>
                     )}
                 </div>
             </div>

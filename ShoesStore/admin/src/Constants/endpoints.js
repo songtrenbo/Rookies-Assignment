@@ -13,6 +13,8 @@ const Endpoints = {
 
     user: '/api/Users',
     userId: (id)=> `api/Users/${id}`,
+
+    login: '/api/Users/login',
 };
 
 export default Endpoints;

@@ -63,7 +63,9 @@ namespace CustomerSite.Controllers
 
             //Get images of product by Id
             var dataImage = await _imageService.GetImages(id);
-            ViewBag.Images = _mapper.Map<IEnumerable<ImageVM>>(dataImage);
+            var images = _mapper.Map<IEnumerable<ImageVM>>(dataImage);
+            ViewBag.Images = images;
+            ViewBag.FirstImage = images.First();
 
             //Get 1 product by Id
             var dataProduct = await _productService.GetProduct(id);
@@ -121,9 +123,12 @@ namespace CustomerSite.Controllers
                     i++;
                 }
                 ViewBag.Points = arrProductPoints;
-                ViewBag.CategorieName = categoryMapping.Where(s => s.CategoryId == categoryId).FirstOrDefault().CategoryName;
+                var category = categoryMapping.Where(s => s.CategoryId == categoryId).FirstOrDefault();
+                ViewBag.CategorieName = category.CategoryName;
+                ViewBag.CategorieDesc = category.Description;
                 return View(productMapping);
             }
         }
+
     }
 }

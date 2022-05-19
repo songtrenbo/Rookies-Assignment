@@ -1,5 +1,6 @@
 ﻿using Backend.Models;
 using Backend.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
@@ -22,6 +24,7 @@ namespace Backend.Controllers
             _categoryRepository = categoryRepository;
         }
         //Get a list of Categories
+        [AllowAnonymous]
         [HttpGet("List")]
         public async Task<ActionResult> GetCategoies()
         {
@@ -42,6 +45,7 @@ namespace Backend.Controllers
         }
 
         //Get a list of categories with pages, search, sort
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult> GetCategoriesPages([FromQuery] CategoryCriteriaDto categoryCriteriaDto)
         {
@@ -57,6 +61,7 @@ namespace Backend.Controllers
         }
 
         //Get 1 category by ID
+        [AllowAnonymous]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
@@ -76,6 +81,7 @@ namespace Backend.Controllers
             }
         }
         //Create a new category
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Brand>> CreateCategory([FromForm] CategoryCreateRequest categoryCreateRequest)
         {
@@ -98,6 +104,7 @@ namespace Backend.Controllers
         }
 
         //Update 1 category
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id:int}")]
         public async Task<ActionResult<Category>> UpdateCategory(int id, [FromForm] CategoryCreateRequest categoryCreateRequest)
         {
@@ -118,6 +125,7 @@ namespace Backend.Controllers
         }
 
         //Delete 1 category
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<Category>> DeleteCategory(int id)
         {

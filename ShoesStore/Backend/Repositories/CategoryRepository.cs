@@ -35,7 +35,8 @@ namespace Backend.Repositories
         {
             var category = new Category
             {
-                CategoryName = categoryCreateRequest.CategoryName
+                CategoryName = categoryCreateRequest.CategoryName,
+                Description = categoryCreateRequest.Description
             };
 
 
@@ -88,6 +89,7 @@ namespace Backend.Repositories
             if (category != null)
             {
                 category.CategoryName = categoryCreateRequest.CategoryName;
+                category.Description = categoryCreateRequest.Description;
                 await _shoesStoreDatabaseContext.SaveChangesAsync();
                 _shoesStoreDatabaseContext.Categories.Update(category);
                 return category;

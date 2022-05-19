@@ -11,7 +11,8 @@ import { createCategoryRequest, UpdateCategoryRequest } from "./services/request
 
 
 const validationSchema = Yup.object().shape({
-    categoryName: Yup.string().required('Required')
+    categoryName: Yup.string().required('Required'),
+    description: Yup.string().required('Required')
 });
 
 const CategoryFormContainer = ({ initialCategoryForm = {
@@ -84,7 +85,11 @@ const CategoryFormContainer = ({ initialCategoryForm = {
                         label="Category Name" 
                         placeholder="input category name" 
                         isrequired />
-                    
+                      <TextField 
+                        name="description" 
+                        label="Description" 
+                        placeholder="input description" 
+                        isrequired />
                     <div className="row">
                             <button className="btn btn-danger col-lg-5 col-12"
                                 type="submit" disabled={loading}

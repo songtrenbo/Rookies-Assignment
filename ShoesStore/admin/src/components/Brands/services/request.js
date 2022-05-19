@@ -4,6 +4,14 @@ import qs from 'qs';
 import RequestService from '../../../services/requests';
 import EndPoints from '../../../Constants/endpoints';
 
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+var accessToken = cookies.get("AccessToken", { path: '/' });
+let config = {
+    headers: {
+      authorization: "Bearer " + accessToken,
+    },
+  };
 export function createBrandRequest(brandForm) {
     const formData = new FormData();
 
@@ -11,7 +19,7 @@ export function createBrandRequest(brandForm) {
         formData.append(key, brandForm[key]);
     });
 
-    return RequestService.axios.post(EndPoints.brand, formData);
+    return RequestService.axios.post(EndPoints.brand, formData, config);
 }
 
 export function getBrandsRequest(query) {
@@ -31,9 +39,9 @@ export function UpdateBrandRequest(brandForm) {
         formData.append(key, brandForm[key]);
     });
 
-    return RequestService.axios.put(EndPoints.brandId(brandForm.brandId ?? - 1), formData);
+    return RequestService.axios.put(EndPoints.brandId(brandForm.brandId ?? - 1), formData, config);
 }
 
 export function DisableBrandRequest(brandId) {
-    return RequestService.axios.delete(EndPoints.brandId(brandId));
+    return RequestService.axios.delete(EndPoints.brandId(brandId), config);
 }

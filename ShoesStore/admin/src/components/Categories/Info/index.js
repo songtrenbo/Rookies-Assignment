@@ -29,6 +29,10 @@ const Info = ({ category, handleClose }) => {
               <td>Name:</td>
               <td className="form-control">{category.categoryName}</td>
             </tr>
+            <tr>
+              <td>Description:</td>
+              <td className="form-control">{category.description}</td>
+            </tr>
           </table>
         </Modal.Body>
       </Modal>

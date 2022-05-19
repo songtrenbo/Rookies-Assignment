@@ -17,5 +17,6 @@ export const EDIT_PRODUCT = '/product/edit/:id';
 export const EDIT_PRODUCT_ID = (id)=>`/product/edit/${id}`;
 
 export const USER = '/user';
+export const LOGIN = '/login';
 
 export const NOTFOUND = '/notfound';
