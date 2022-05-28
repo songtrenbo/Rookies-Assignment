@@ -1,0 +1,169 @@
+﻿@{
+    ViewData["Title"] = "Shop";
+}
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/Scripts/Alert/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        if (window.localStorage) {
+            cart = JSON.parse(window.localStorage.getItem("cart"));
+        }
+        //Push product to cart
+        for (var i = 0; i < cart.length; i++) {
+            tableBody = $("table tbody");
+            tableBody.append('<tr><td style="text-align: center;vertical-align: middle;">' +
+                '<input type="checkbox" class="div1 show" data-id="' + cart[i].productId + '" checked></td><td style="vertical-align: middle;">' +
+                '<figure class="itemside align-items-center">' +
+                '<img src="' + cart[i].image + '" width="80" class="mr-3">' +
+                '<a href="#" class="title text-dark" data-abc="true">' + cart[i].productName + '</a>' +
+                '</td><td style="vertical-align: middle;"><div class="d-flex align-items-center"> <var class="price">' + cart[i].productPrice + " $" + '</var> </div></td>' +
+                '<td style="vertical-align: middle;"><div class="input-group">' +
+                '<button type="button" class=" form-control" style="text-align:center" id="decrease" data-id="' + cart[i].productId + '" onclick="decreaseValue(this)" value="Decrease Value">-</button>' +
+                '<input type = "text" onkeypress="return onlyNumberKey(event)" onkeyup="InputChange(this)" style="text-align:center;" class="quantity form-control d-flex align-items-center" data-id="' + cart[i].productId + '" min="1" max="' + cart[i].stock + '" value="' + cart[i].quantity + '"/>' +
+                '<button type="button" class="form-control" style="text-align:center" id="increase" data-id="' + cart[i].productId + '" onclick="increaseValue(this)" value="Increase Value">+</button>' +
+                '</div></td>' +
+                '<td class="text-right" style="vertical-align: middle;"> <a href="#" class="btn btn-light" data-abc="true" onclick="ConfirmDeleteCart(this)" data-pro-id="' + cart[i].productId + '"> Remove</a> </td></tr > "')
+            document.getElementsByClassName("div1")[i].checked = cart[i].buyCheck;
+
+        }
+
+        function ConfirmDeleteCart(product) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You cant restore the product!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                    var productId = product.getAttribute("data-pro-id");
+                    Xoacart(productId);
+                }
+            })
+        }
+
+        function Xoacart(productId) {
+            var tmp = cart;
+            window.localStorage.removeItem("cart");
+            for (var i = 0; i < tmp.length; i++) {
+                if (tmp[i].productId == productId)
+                    tmp.splice(i, 1);
+            }
+            cart = tmp;
+            window.localStorage.setItem("cart", JSON.stringify(cart));
+            location.reload();
+        }
+
+        function increaseValue(num) {
+            var productId = num.getAttribute("data-id");
+            for (var i = 0; i < cart.length; i++) {
+                if (cart[i].productId == productId)
+                    if (cart[i].quantity + 1 > cart[i].stock) {
+                        cart[i].quantity = cart[i].stock;
+                    }
+                    else {
+                        cart[i].quantity++;
+                    }
+            }
+
+            window.localStorage.setItem("cart", JSON.stringify(cart));
+            location.reload();
+        }
+        //Giảm số lượng sản phẩm trong giỏ hàng
+        function decreaseValue(num) {
+            var productId = num.getAttribute("data-id");
+            for (var i = 0; i < cart.length; i++) {
+                if (cart[i].productId == productId)
+                    if (cart[i].quantity - 1 < 1) {
+                        cart[i].quantity = 1;
+                    }
+                    else {
+                        cart[i].quantity--;
+                    }
+            }
+
+            window.localStorage.setItem("cart", JSON.stringify(cart));
+            location.reload();
+        }
+        function precisionRound(number, precision) {
+            var factor = Math.pow(10, precision);
+            return Math.round(number * factor) / factor;
+        }
+        var total = 0;
+        var totalQuantity = 0;
+        for (var i = 0; i < cart.length; i++) {
+            total += cart[i].productPrice * cart[i].quantity;
+            totalQuantity += cart[i].quantity;
+        }
+        $("#TotalPrice").text(precisionRound(total, 2) + " $");
+        $("#TotalQuantity").text(totalQuantity);
+        function Order() {
+            cartorder = window.localStorage.getItem("cart");
+            $.ajax({
+                type: "POST",
+                url: '/Cart/Order/',
+                data: {
+                    dataCart: cartorder
+                },
+            });
+            window.localStorage.removeItem("cart");
+            location.reload();
+        }
+    </script>
+}
+
+<br />
+<table class="table">
+    <thead class="text-muted">
+        <tr class="small text-uppercase">
+            <th scope="col">
+                <input type="checkbox" id="checkdiv1">
+            </th>
+            <th scope="col">Product</th>
+            <th scope="col" width="150">Price</th>
+            <th scope="col" width="200" style="text-align:center">Quantity</th>
+            <th scope="col" class="text-right"></th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<div class="row mb-5">
+    <div class="col-5">
+        <div class="row">
+            <h4 class="col-8">Total price:</h4>
+            <h4 class="col-4" id="TotalPrice">0</h4>
+        </div>
+    </div>
+
+    <div class="col-2">
+
+    </div>
+
+    <div class="col-5">
+        <div class="row">
+            <h4 class="col-8">Total quantity:</h4>
+            <h4 class="col-4" id="TotalQuantity">0</h4>
+        </div>
+    </div>
+</div>
+@if (@HttpContextAccessor.HttpContext.Session.GetString("Fullname") != null)
+{
+    <button class="btn btn-dark float-end" onclick='Order()'>Order now</button>
+}
+else
+{
+    <a class="btn btn-dark text-light float-end" href="@Url.Action("Login","User")">Login to Order</a>
+}
+<br />
+<br />
